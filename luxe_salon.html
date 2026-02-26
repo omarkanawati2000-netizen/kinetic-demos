@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxe Salon &mdash; Salon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+      --bg: #1B1B2F;
+      --primary: #C9A84C;
+      --accent: #E8CDA0;
+      --text: #E0D6C8;
+      --card-bg: #252542;
+      --heading-font: 'Poiret One', cursive;
+      --body-font: 'Raleway', sans-serif;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body-font);
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      align-items: center; text-align: center; padding: 4rem;
+      background: var(--bg);
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 60px,
+        rgba(212,175,55,0.05) 60px, rgba(212,175,55,0.05) 61px
+      ), repeating-linear-gradient(
+        90deg, transparent, transparent 60px,
+        rgba(212,175,55,0.05) 60px, rgba(212,175,55,0.05) 61px
+      );
+    }
+    .hero-deco { width: 80px; height: 2px; background: var(--primary); margin: 0 auto 2rem; position: relative; }
+    .hero-deco::before, .hero-deco::after { content: ''; position: absolute; width: 8px; height: 8px; background: var(--primary); top: -3px; transform: rotate(45deg); }
+    .hero-deco::before { left: -12px; }
+    .hero-deco::after { right: -12px; }
+    .hero h1 {
+      font-family: var(--heading-font); font-size: clamp(3rem,7vw,5.5rem);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero .tagline {
+      font-family: var(--body-font); font-weight: 300; font-size: 1.1rem;
+      letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 3rem;
+      color: var(--primary); opacity: 0.8;
+    }
+    .cta-btn {
+      display: inline-block; padding: 1rem 3rem; border: 2px solid var(--primary);
+      color: var(--primary); font-family: var(--body-font); font-size: 0.85rem;
+      font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.3s;
+    }
+    .cta-btn:hover { background: var(--primary); color: var(--bg); }
+    .info-section {
+      padding: 5rem 3rem; max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 2rem;
+    }
+    .card {
+      background: var(--card-bg); padding: 2.5rem; text-align: center;
+      border: 1px solid rgba(212,175,55,0.2); transition: border-color 0.3s;
+    }
+    .card:hover { border-color: var(--primary); }
+    .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .card h3 { font-family: var(--heading-font); font-size: 1.3rem; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .card p { font-weight: 300; line-height: 1.7; font-size: 0.95rem; }
+    .card a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .services { padding: 5rem 3rem; max-width: 1000px; margin: 0 auto; text-align: center; }
+    .services h2 { font-family: var(--heading-font); font-size: 2rem; letter-spacing: 0.15em; margin-bottom: 2.5rem; }
+    .srv-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1.5rem; }
+    .srv-item { padding: 1.2rem; border: 1px solid rgba(212,175,55,0.15); font-weight: 400; letter-spacing: 0.08em; font-size: 0.95rem; }
+    .cta-banner { padding: 5rem 3rem; text-align: center; background: var(--card-bg); }
+    .cta-banner h2 { font-family: var(--heading-font); font-size: 2.5rem; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .cta-banner p { font-weight: 300; font-size: 1.1rem; margin-bottom: 2rem; letter-spacing: 0.05em; }
+    footer { padding: 2rem; text-align: center; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 300; }
+    footer a { color: var(--primary); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-deco"></div>
+    <div class="hero-icon">&#128135;</div>
+    <h1>Luxe Salon</h1>
+    <p class="tagline">Look Your Best, Feel Your Best</p>
+    <a href="tel:7205554321" class="cta-btn">Call Now &mdash; (720) 555-4321</a>
+  </section>
+
+  
+
+  <section class="info-section">
+    <div class="card">
+      <div class="card-icon">&#128205;</div>
+      <h3>Find Us</h3>
+      <p>789 Pine St, Boulder, CO</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128222;</div>
+      <h3>Call Us</h3>
+      <p><a href="tel:7205554321">(720) 555-4321</a></p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#9200;</div>
+      <h3>Hours</h3>
+      <p>Mon&ndash;Fri: 8AM &ndash; 6PM<br>Sat: 9AM &ndash; 3PM<br>Sun: Closed</p>
+    </div>
+  </section>
+
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="srv-grid">
+    <div class="srv-item">Haircuts &amp; Styling</div>
+    <div class="srv-item">Color &amp; Highlights</div>
+    <div class="srv-item">Treatments</div>
+    <div class="srv-item">Bridal Packages</div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Ready to Get Started?</h2>
+    <p>Give us a call &mdash; free estimates available.</p>
+    <a href="tel:7205554321" class="cta-btn">(720) 555-4321</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Luxe Salon. All rights reserved.</p>
+    <p style="margin-top:0.5rem;">Website by <a href="#">Kinetic Digital</a></p>
+  </footer>
+
+</body>
+</html>

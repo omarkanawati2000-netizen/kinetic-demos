@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Roofing &mdash; Roofing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+      --bg: #134E5E;
+      --primary: #FFFFFF;
+      --accent: #71B280;
+      --text: #FFFFFF;
+      --card-bg: rgba(255,255,255,0.12);
+      --heading-font: 'Plus Jakarta Sans', sans-serif;
+      --body-font: 'Plus Jakarta Sans', sans-serif;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body-font);
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    body { background: linear-gradient(135deg, #134E5E, #134E5Ecc, #71B28088); min-height: 100vh; }
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      align-items: center; text-align: center; padding: 3rem; position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%;
+      background: #71B280; filter: blur(120px); opacity: 0.4; top: 10%; left: 10%;
+    }
+    .hero::after {
+      content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%;
+      background: #FFFFFF; filter: blur(100px); opacity: 0.2; bottom: 10%; right: 15%;
+    }
+    .hero * { position: relative; z-index: 1; }
+    .hero-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+    .hero h1 {
+      font-family: var(--heading-font); font-weight: 700;
+      font-size: clamp(2.5rem,6vw,4.5rem); line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero .tagline { font-size: 1.2rem; opacity: 0.85; margin-bottom: 2.5rem; font-weight: 300; }
+    .cta-btn {
+      display: inline-block; padding: 1rem 2.5rem;
+      background: rgba(255,255,255,0.2); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.3); border-radius: 50px;
+      color: var(--primary); font-weight: 700; font-size: 1rem;
+      text-decoration: none; transition: all 0.3s;
+    }
+    .cta-btn:hover { background: rgba(255,255,255,0.35); transform: translateY(-2px); }
+    .info-section {
+      padding: 4rem 2rem; max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.5rem;
+    }
+    .card {
+      background: var(--card-bg); backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
+      padding: 2.5rem; transition: transform 0.3s;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .card h3 { font-family: var(--heading-font); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .card p { line-height: 1.7; opacity: 0.85; font-weight: 300; }
+    .card a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .services { padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; text-align: center; }
+    .services h2 { font-family: var(--heading-font); font-size: 2rem; font-weight: 700; margin-bottom: 2.5rem; }
+    .srv-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 1rem; }
+    .srv-item {
+      padding: 1.5rem; background: var(--card-bg); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 12px;
+      font-weight: 500;
+    }
+    .cta-banner { padding: 5rem 2rem; text-align: center; }
+    .cta-banner h2 { font-family: var(--heading-font); font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
+    .cta-banner p { opacity: 0.8; font-size: 1.1rem; margin-bottom: 2rem; font-weight: 300; }
+    footer { padding: 2rem; text-align: center; font-size: 0.8rem; opacity: 0.6; }
+    footer a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+  <section class="hero">
+    
+    <div class="hero-icon">&#127968;</div>
+    <h1>Apex Roofing</h1>
+    <p class="tagline">Protecting What Matters Most</p>
+    <a href="tel:3035559876" class="cta-btn">Call Now &mdash; (303) 555-9876</a>
+  </section>
+
+  
+
+  <section class="info-section">
+    <div class="card">
+      <div class="card-icon">&#128205;</div>
+      <h3>Find Us</h3>
+      <p>456 Oak Ave, Denver, CO</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128222;</div>
+      <h3>Call Us</h3>
+      <p><a href="tel:3035559876">(303) 555-9876</a></p>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#9200;</div>
+      <h3>Hours</h3>
+      <p>Mon&ndash;Fri: 8AM &ndash; 6PM<br>Sat: 9AM &ndash; 3PM<br>Sun: Closed</p>
+    </div>
+  </section>
+
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="srv-grid">
+    <div class="srv-item">Roof Repair</div>
+    <div class="srv-item">Full Replacement</div>
+    <div class="srv-item">Gutter Installation</div>
+    <div class="srv-item">Storm Damage</div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <h2>Ready to Get Started?</h2>
+    <p>Give us a call &mdash; free estimates available.</p>
+    <a href="tel:3035559876" class="cta-btn">(303) 555-9876</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Apex Roofing. All rights reserved.</p>
+    <p style="margin-top:0.5rem;">Website by <a href="#">Kinetic Digital</a></p>
+  </footer>
+
+</body>
+</html>
