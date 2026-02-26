@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Randy's Olde Tyme Barber Shop — Old Colorado City, Colorado Springs</title>
+  <meta name="description" content="Randy's Olde Tyme Barber Shop — Traditional barbering on historic West Colorado Ave in Old Colorado City. Men's cuts, straight razor shaves, beard trims. (719) 328-1135" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Bree+Serif&family=Merriweather+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════
+       ROOT VARIABLES & RESET
+    ═══════════════════════════════════════════ */
+    :root {
+      --parchment:    #F4ECD8;
+      --parchment-dark: #E8D9B8;
+      --parchment-deeper: #D9C49A;
+      --burgundy:     #6B1D1D;
+      --burgundy-light: #8B2828;
+      --burgundy-dark: #4A1010;
+      --saddle:       #8B4513;
+      --saddle-light: #A0521A;
+      --denim:        #4A6B8A;
+      --denim-light:  #5A7FA0;
+      --denim-dark:   #354E65;
+      --ink:          #1A0F00;
+      --cream:        #FBF5E6;
+      --gold:         #C9933A;
+      --gold-light:   #E8B860;
+
+      --ff-heading:   'Rye', 'Bree Serif', serif;
+      --ff-body:      'Merriweather Sans', sans-serif;
+      --ff-accent:    'Playfair Display', serif;
+
+      --shadow-warm:  0 4px 20px rgba(107, 29, 29, 0.25);
+      --shadow-deep:  0 8px 40px rgba(26, 15, 0, 0.35);
+      --transition:   0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--ff-body);
+      background-color: var(--parchment);
+      color: var(--ink);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.6;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Decorative dividers ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 auto 40px;
+      max-width: 480px;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .divider-icon {
+      color: var(--gold);
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .section-label {
+      font-family: var(--ff-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: var(--ff-heading);
+      line-height: 1.15;
+      color: var(--burgundy);
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: transparent;
+      transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+      padding: 20px 0;
+    }
+
+    #navbar.scrolled {
+      background: rgba(26, 15, 0, 0.97);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+      padding: 12px 0;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--ff-heading);
+      font-size: 1.3rem;
+      color: var(--parchment);
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+      line-height: 1.2;
+    }
+    .nav-logo span {
+      display: block;
+      font-family: var(--ff-body);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 300;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: var(--ff-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      position: relative;
+      transition: color var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--burgundy);
+      color: var(--parchment) !important;
+      padding: 8px 18px;
+      border-radius: 3px;
+      border: 1px solid var(--gold);
+      transition: background var(--transition), transform var(--transition) !important;
+    }
+    .nav-cta:hover {
+      background: var(--burgundy-light) !important;
+      transform: translateY(-1px);
+    }
+    .nav-cta::after { display: none !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--parchment);
+      border-radius: 2px;
+      transition: transform 0.35s, opacity 0.35s;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(26, 15, 0, 0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 80px 24px 40px;
+      transform: translateY(-100%);
+      transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .mobile-menu.open {
+      transform: translateY(0);
+    }
+    .mobile-menu a {
+      font-family: var(--ff-heading);
+      font-size: 2rem;
+      color: var(--parchment);
+      text-align: center;
+      transition: color var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--gold-light); }
+    .mobile-menu .mobile-cta {
+      margin-top: 8px;
+      background: var(--burgundy);
+      padding: 14px 36px;
+      border-radius: 4px;
+      border: 1px solid var(--gold);
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background-color: var(--ink);
+    }
+
+    /* Background layers */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(107,29,29,0.45) 0%, transparent 70%),
+        linear-gradient(180deg, rgba(26,15,0,0.9) 0%, rgba(74,16,16,0.75) 40%, rgba(26,15,0,0.95) 100%);
+      z-index: 1;
+    }
+
+    /* Barber pole stripes pattern */
+    .hero-stripes {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 40px,
+        rgba(107, 29, 29, 0.08) 40px,
+        rgba(107, 29, 29, 0.08) 80px
+      );
+      z-index: 0;
+    }
+
+    /* Wood grain texture */
+    .hero-wood {
+      position: absolute;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='wood'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.015 0.6' numOctaves='4' seed='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23wood)' opacity='0.07'/%3E%3C/svg%3E");
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      padding: 120px 24px 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(201, 147, 58, 0.15);
+      border: 1px solid rgba(201, 147, 58, 0.5);
+      border-radius: 100px;
+      padding: 6px 20px;
+      font-family: var(--ff-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 28px;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero-scissors {
+      font-size: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--ff-heading);
+      font-size: clamp(3rem, 9vw, 7.5rem);
+      color: var(--parchment);
+      line-height: 1;
+      text-shadow:
+        3px 3px 0px rgba(107, 29, 29, 0.6),
+        6px 6px 20px rgba(0,0,0,0.5);
+      margin-bottom: 12px;
+      animation: fadeDown 0.9s ease 0.1s both;
+    }
+
+    .hero-subtitle {
+      font-family: var(--ff-heading);
+      font-size: clamp(1.1rem, 3vw, 2rem);
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      animation: fadeDown 0.9s ease 0.15s both;
+    }
+
+    .hero-tagline {
+      font-family: var(--ff-accent);
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      color: var(--parchment);
+      opacity: 0.85;
+      margin-bottom: 48px;
+      animation: fadeDown 0.9s ease 0.2s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.9s ease 0.35s both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--burgundy);
+      color: var(--parchment);
+      font-family: var(--ff-body);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border-radius: 4px;
+      border: 2px solid var(--gold);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.08));
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .btn-primary:hover {
+      background: var(--burgundy-light);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(107, 29, 29, 0.5);
+    }
+    .btn-primary:hover::before { opacity: 1; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--parchment);
+      font-family: var(--ff-body);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 14px 30px;
+      border-radius: 4px;
+      border: 2px solid rgba(244, 236, 216, 0.4);
+      transition: all var(--transition);
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(244, 236, 216, 0.5);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: fadeUp 1s ease 0.8s both;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    /* Barber pole side decoration */
+    .barber-pole {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      overflow: hidden;
+      z-index: 1;
+      opacity: 0.15;
+    }
+    .barber-pole-left { left: 60px; }
+    .barber-pole-right { right: 60px; }
+    .barber-pole-inner {
+      width: 100%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        180deg,
+        var(--burgundy) 0px,
+        var(--burgundy) 30px,
+        white 30px,
+        white 60px,
+        #1A3A6E 60px,
+        #1A3A6E 90px
+      );
+      animation: poleScroll 4s linear infinite;
+    }
+
+    @media (max-width: 640px) {
+      .barber-pole { display: none; }
+    }
+
+    /* ═══════════════════════════════════════════
+       TRUST BAR
+    ═══════════════════════════════════════════ */
+    #trust-bar {
+      background: var(--burgundy-dark);
+      border-top: 3px solid var(--gold);
+      border-bottom: 3px solid var(--gold);
+      padding: 18px 0;
+    }
+
+    .trust-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 24px;
+      color: var(--parchment);
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(244, 236, 216, 0.2);
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item-icon {
+      font-size: 18px;
+      color: var(--gold-light);
+    }
+
+    @media (max-width: 640px) {
+      .trust-item {
+        border-right: none;
+        padding: 8px 16px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════ */
+    #about {
+      padding: 100px 0;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Corner ornaments */
+    #about::before {
+      content: '✦';
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      font-size: 2rem;
+      color: var(--gold);
+      opacity: 0.3;
+    }
+    #about::after {
+      content: '✦';
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-size: 2rem;
+      color: var(--gold);
+      opacity: 0.3;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-frame {
+      position: relative;
+      border: 3px solid var(--saddle);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: var(--shadow-deep);
+    }
+
+    .about-image-placeholder {
+      background: linear-gradient(135deg, var(--burgundy-dark) 0%, var(--saddle) 50%, var(--burgundy) 100%);
+      padding: 60px 40px;
+      aspect-ratio: 4/5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(255,255,255,0.02) 20px,
+        rgba(255,255,255,0.02) 40px
+      );
+    }
+
+    .shop-emblem {
+      font-size: 5rem;
+      filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.5));
+      position: relative;
+      z-index: 1;
+    }
+
+    .shop-emblem-text {
+      font-family: var(--ff-heading);
+      color: var(--parchment);
+      font-size: 1.5rem;
+      text-align: center;
+      line-height: 1.3;
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .shop-emblem-sub {
+      font-family: var(--ff-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 110px;
+      height: 110px;
+      background: var(--burgundy);
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: var(--shadow-warm);
+    }
+    .about-badge-num {
+      font-family: var(--ff-heading);
+      font-size: 1.8rem;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .about-badge-text {
+      font-family: var(--ff-body);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      line-height: 1.3;
+    }
+
+    .about-text h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 24px;
+    }
+
+    .about-text p {
+      font-size: 0.95rem;
+      color: #3A2A15;
+      margin-bottom: 18px;
+      line-height: 1.85;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .about-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--burgundy);
+      letter-spacing: 0.04em;
+    }
+    .about-feature-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════════ */
+    #services {
+      padding: 100px 0;
+      background: var(--parchment);
+      position: relative;
+    }
+
+    /* Horizontal lines background */
+    #services::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 60px,
+        rgba(139, 69, 19, 0.05) 60px,
+        rgba(139, 69, 19, 0.05) 61px
+      );
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .services-header h2 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .services-header p {
+      font-size: 0.95rem;
+      color: var(--saddle);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-card {
+      background: var(--cream);
+      border: 2px solid var(--parchment-deeper);
+      border-radius: 6px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: all var(--transition);
+      cursor: default;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--burgundy), var(--saddle));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--saddle);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-warm);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .service-name {
+      font-family: var(--ff-heading);
+      font-size: 1.25rem;
+      color: var(--burgundy);
+      margin-bottom: 8px;
+    }
+
+    .service-desc {
+      font-size: 0.82rem;
+      color: #5A4020;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .service-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .service-price {
+      font-family: var(--ff-heading);
+      font-size: 1.8rem;
+      color: var(--saddle);
+    }
+
+    .service-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(107, 29, 29, 0.1);
+      color: var(--burgundy);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    /* ═══════════════════════════════════════════
+       WHY CHOOSE US
+    ═══════════════════════════════════════════ */
+    #why {
+      padding: 100px 0;
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #why::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 20% 50%, rgba(107,29,29,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 50%, rgba(74,107,138,0.15) 0%, transparent 60%);
+    }
+
+    #why::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 30px,
+        rgba(255,255,255,0.015) 30px,
+        rgba(255,255,255,0.015) 60px
+      );
+    }
+
+    .why-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .why-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .why-header h2 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      color: var(--parchment);
+      margin-bottom: 16px;
+    }
+    .why-header p {
+      color: rgba(244, 236, 216, 0.65);
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 32px;
+    }
+
+    .why-card {
+      text-align: center;
+      padding: 40px 24px;
+      border: 1px solid rgba(201, 147, 58, 0.2);
+      border-radius: 6px;
+      background: rgba(244, 236, 216, 0.04);
+      transition: all var(--transition);
+    }
+    .why-card:hover {
+      background: rgba(244, 236, 216, 0.08);
+      border-color: rgba(201, 147, 58, 0.5);
+      transform: translateY(-4px);
+    }
+
+    .why-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .why-stat {
+      font-family: var(--ff-heading);
+      font-size: 3rem;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .why-label {
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      margin-bottom: 12px;
+    }
+
+    .why-desc {
+      font-size: 0.82rem;
+      color: rgba(244, 236, 216, 0.55);
+      line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════════════════ */
+    #testimonials {
+      padding: 100px 0;
+      background: var(--burgundy-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #testimonials::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23C9933A' opacity='0.15'/%3E%3C/svg%3E");
+      background-size: 60px 60px;
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 64px;
+      position: relative;
+      z-index: 1;
+    }
+    .testimonials-header h2 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      color: var(--parchment);
+      margin-bottom: 16px;
+    }
+
+    .testimonials-header .yelp-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: rgba(244, 236, 216, 0.65);
+    }
+    .yelp-stars {
+      color: #FF1A1A;
+      font-size: 14px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-card {
+      background: rgba(244, 236, 216, 0.06);
+      border: 1px solid rgba(201, 147, 58, 0.25);
+      border-radius: 8px;
+      padding: 36px 28px;
+      position: relative;
+      transition: all var(--transition);
+    }
+    .testimonial-card:hover {
+      background: rgba(244, 236, 216, 0.1);
+      border-color: rgba(201, 147, 58, 0.5);
+      transform: translateY(-4px);
+    }
+
+    .testimonial-quote-mark {
+      position: absolute;
+      top: -14px;
+      left: 24px;
+      font-family: var(--ff-accent);
+      font-size: 5rem;
+      color: var(--gold);
+      line-height: 1;
+      font-style: italic;
+      opacity: 0.4;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    .testimonial-stars span {
+      color: var(--gold-light);
+      font-size: 16px;
+    }
+
+    .testimonial-text {
+      font-family: var(--ff-accent);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--parchment);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .testimonial-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--saddle), var(--burgundy));
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ff-heading);
+      font-size: 1.1rem;
+      color: var(--parchment);
+      flex-shrink: 0;
+    }
+
+    .testimonial-name {
+      font-family: var(--ff-body);
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--gold-light);
+      margin-bottom: 2px;
+    }
+    .testimonial-meta {
+      font-size: 0.72rem;
+      color: rgba(244, 236, 216, 0.45);
+    }
+
+    .testimonial-platform {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(244, 236, 216, 0.3);
+    }
+
+    /* ═══════════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════════ */
+    #faq {
+      padding: 100px 0;
+      background: var(--cream);
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .faq-header h2 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+    .faq-header p {
+      font-size: 0.95rem;
+      color: var(--saddle);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .faq-list {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--parchment);
+      border: 2px solid var(--parchment-deeper);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color var(--transition);
+    }
+    .faq-item.open { border-color: var(--saddle); }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--ff-heading);
+      font-size: 1.05rem;
+      color: var(--burgundy);
+      transition: color var(--transition);
+    }
+    .faq-question:hover { color: var(--saddle); }
+
+    .faq-chevron {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      color: var(--parchment);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      transition: transform 0.35s ease, background var(--transition);
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      background: var(--saddle);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 24px;
+      font-size: 0.9rem;
+      color: #4A3010;
+      line-height: 1.8;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 22px;
+    }
+
+    /* ═══════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════ */
+    #contact {
+      padding: 100px 0;
+      background: var(--parchment);
+      position: relative;
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .contact-header h2 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      margin-bottom: 16px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .contact-info h3 {
+      font-family: var(--ff-heading);
+      font-size: 1.4rem;
+      color: var(--burgundy);
+      margin-bottom: 24px;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--parchment-deeper);
+    }
+    .contact-detail:last-child { border-bottom: none; }
+
+    .contact-icon-wrap {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      box-shadow: 0 3px 12px rgba(107,29,29,0.3);
+    }
+
+    .contact-detail-text h4 {
+      font-family: var(--ff-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .contact-detail-text p, .contact-detail-text a {
+      font-size: 0.92rem;
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    .contact-detail-text a:hover { color: var(--burgundy); }
+
+    .hours-table {
+      margin-top: 8px;
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      padding: 3px 0;
+    }
+    .hours-day { color: #5A4020; font-weight: 600; }
+    .hours-time { color: var(--burgundy); font-weight: 700; }
+    .hours-closed { color: #999; font-style: italic; }
+
+    /* Contact Form */
+    .contact-form-wrap {
+      background: var(--cream);
+      border: 2px solid var(--parchment-deeper);
+      border-radius: 8px;
+      padding: 40px 36px;
+      position: relative;
+    }
+
+    .contact-form-wrap::before {
+      content: '✂';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--cream);
+      padding: 0 12px;
+      font-size: 20px;
+      color: var(--burgundy);
+    }
+
+    .contact-form-wrap h3 {
+      font-family: var(--ff-heading);
+      font-size: 1.4rem;
+      color: var(--burgundy);
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--saddle);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--parchment);
+      border: 2px solid var(--parchment-deeper);
+      border-radius: 4px;
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      color: var(--ink);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--saddle);
+      box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.15);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--burgundy);
+      color: var(--parchment);
+      border: 2px solid var(--saddle);
+      border-radius: 4px;
+      font-family: var(--ff-heading);
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all var(--transition);
+      margin-top: 8px;
+    }
+    .form-submit:hover {
+      background: var(--saddle);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-warm);
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    #footer {
+      background: var(--ink);
+      border-top: 4px solid var(--gold);
+      padding: 60px 0 30px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    @media (max-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .footer-brand .footer-logo {
+      font-family: var(--ff-heading);
+      font-size: 1.8rem;
+      color: var(--parchment);
+      margin-bottom: 14px;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(244, 236, 216, 0.5);
+      line-height: 1.7;
+      max-width: 300px;
+      margin-bottom: 20px;
+    }
+
+    .footer-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--burgundy);
+      color: var(--parchment);
+      font-family: var(--ff-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 4px;
+      border: 1px solid var(--gold);
+      transition: all var(--transition);
+    }
+    .footer-cta-btn:hover {
+      background: var(--burgundy-light);
+      transform: translateY(-2px);
+    }
+
+    .footer-col h4 {
+      font-family: var(--ff-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(201, 147, 58, 0.3);
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.84rem;
+      color: rgba(244, 236, 216, 0.55);
+      transition: color var(--transition);
+    }
+    .footer-col ul li a:hover { color: var(--gold-light); }
+
+    .footer-col p {
+      font-size: 0.84rem;
+      color: rgba(244, 236, 216, 0.55);
+      line-height: 1.7;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(244, 236, 216, 0.1);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: rgba(244, 236, 216, 0.3);
+    }
+
+    .footer-bottom .credit {
+      color: rgba(244, 236, 216, 0.45);
+    }
+    .footer-bottom .credit a {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Barber pole decoration in footer */
+    .footer-pole {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(244, 236, 216, 0.2);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* ═══════════════════════════════════════════
+       FLOATING CALL BUTTON
+    ═══════════════════════════════════════════ */
+    .float-call {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 500;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      border: 3px solid var(--gold);
+      color: var(--parchment);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 20px rgba(107, 29, 29, 0.5);
+      transition: all var(--transition);
+      animation: pulseRing 3s ease-in-out infinite;
+    }
+    .float-call:hover {
+      transform: scale(1.1) translateY(-2px);
+      box-shadow: 0 8px 30px rgba(107, 29, 29, 0.6);
+    }
+
+    /* ═══════════════════════════════════════════
+       KEYFRAMES
+    ═══════════════════════════════════════════ */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(1.15); }
+    }
+
+    @keyframes poleScroll {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-50%); }
+    }
+
+    @keyframes pulseRing {
+      0%   { box-shadow: 0 4px 20px rgba(107,29,29,0.5), 0 0 0 0 rgba(107,29,29,0.4); }
+      60%  { box-shadow: 0 4px 20px rgba(107,29,29,0.5), 0 0 0 14px rgba(107,29,29,0); }
+      100% { box-shadow: 0 4px 20px rgba(107,29,29,0.5), 0 0 0 0 rgba(107,29,29,0); }
+    }
+
+    /* ═══════════════════════════════════════════
+       ORNAMENTAL BORDER HELPER
+    ═══════════════════════════════════════════ */
+    .ornament-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 auto 16px;
+    }
+    .ornament-line::before,
+    .ornament-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+    .ornament-line span {
+      font-size: 14px;
+      color: var(--gold);
+    }
+
+    /* ═══════════════════════════════════════════
+       MISC HELPERS
+    ═══════════════════════════════════════════ */
+    .text-center { text-align: center; }
+
+    .stagger-1 { transition-delay: 0.1s !important; }
+    .stagger-2 { transition-delay: 0.2s !important; }
+    .stagger-3 { transition-delay: 0.3s !important; }
+    .stagger-4 { transition-delay: 0.4s !important; }
+    .stagger-5 { transition-delay: 0.5s !important; }
+    .stagger-6 { transition-delay: 0.6s !important; }
+    .stagger-7 { transition-delay: 0.7s !important; }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════
+       FLOATING CALL BUTTON
+  ════════════════════════════════ -->
+  <a href="tel:+17193281135" class="float-call" title="Call Randy's Barber Shop" aria-label="Call us">
+    📞
+  </a>
+
+  <!-- ════════════════════════════════
+       NAVIGATION
+  ════════════════════════════════ -->
+  <nav id="navbar" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">
+        Randy's ✂
+        <span>Olde Tyme Barber Shop</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Find Us</a></li>
+        <li><a href="tel:+17193281135" class="nav-cta">📞 Call Now</a></li>
+      </ul>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+    <a href="#about"        onclick="closeMobileMenu()">Our Story</a>
+    <a href="#services"     onclick="closeMobileMenu()">Services &amp; Prices</a>
+    <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
+    <a href="#faq"          onclick="closeMobileMenu()">FAQ</a>
+    <a href="#contact"      onclick="closeMobileMenu()">Find Us</a>
+    <a href="tel:+17193281135" class="mobile-cta">📞 (719) 328-1135</a>
+  </div>
+
+  <!-- ════════════════════════════════
+       HERO
+  ════════════════════════════════ -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-stripes"></div>
+    <div class="hero-wood"></div>
+    <div class="hero-bg"></div>
+
+    <div class="barber-pole barber-pole-left" aria-hidden="true">
+      <div class="barber-pole-inner"></div>
+    </div>
+    <div class="barber-pole barber-pole-right" aria-hidden="true">
+      <div class="barber-pole-inner"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-scissors">✂</span>
+        Est. on Historic West Colorado Ave
+        <span class="hero-scissors">✂</span>
+      </div>
+
+      <h1 class="hero-title">Randy's<br>Olde Tyme<br>Barber Shop</h1>
+      <p class="hero-subtitle">Old Colorado City, Colorado Springs</p>
+      <p class="hero-tagline">"Old-Fashioned Service Since Day One"</p>
+
+      <div class="hero-actions">
+        <a href="tel:+17193281135" class="btn-primary">
+          📞 Call (719) 328-1135
+        </a>
+        <a href="#services" class="btn-secondary">
+          View Services &amp; Prices ↓
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       TRUST BAR
+  ════════════════════════════════ -->
+  <div id="trust-bar" role="complementary" aria-label="Trust indicators">
+    <div class="container">
+      <div class="trust-items">
+        <div class="trust-item reveal stagger-1">
+          <span class="trust-item-icon">⭐</span>
+          <span>5-Star Yelp Reviews</span>
+        </div>
+        <div class="trust-item reveal stagger-2">
+          <span class="trust-item-icon">✂</span>
+          <span>Traditional Barbering</span>
+        </div>
+        <div class="trust-item reveal stagger-3">
+          <span class="trust-item-icon">🏛</span>
+          <span>Historic Old Colorado City</span>
+        </div>
+        <div class="trust-item reveal stagger-4">
+          <span class="trust-item-icon">💈</span>
+          <span>Walk-Ins Welcome</span>
+        </div>
+        <div class="trust-item reveal stagger-5">
+          <span class="trust-item-icon">🤝</span>
+          <span>Community Fixture</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       ABOUT
+  ════════════════════════════════ -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-visual reveal-left">
+          <div class="about-frame">
+            <div class="about-image-placeholder">
+              <div class="shop-emblem">💈</div>
+              <div class="shop-emblem-text">Randy's Olde Tyme<br>Barber Shop</div>
+              <div class="shop-emblem-sub">3436 W Colorado Ave · Colorado Springs</div>
+            </div>
+          </div>
+          <div class="about-badge" aria-label="20 Yelp reviews">
+            <div class="about-badge-num">20</div>
+            <div class="about-badge-text">Yelp<br>Reviews</div>
+          </div>
+        </div>
+
+        <div class="about-text reveal-right">
+          <span class="section-label">Our Story</span>
+          <h2 class="section-title" id="about-heading">A Landmark on<br>West Colorado Ave</h2>
+
+          <div class="divider" style="margin: 20px 0 28px; max-width: 100%;">
+            <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
+            <span style="color:var(--gold);font-size:16px;">✦</span>
+            <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
+          </div>
+
+          <p>
+            Nestled in the heart of <strong>historic Old Colorado City</strong> — one of Colorado Springs'
+            most beloved and storied neighborhoods — Randy's Olde Tyme Barber Shop has been a trusted
+            anchor of West Colorado Avenue for years. This stretch of road tells the tale of the West,
+            and Randy's tells it in every razor-clean shave and scissor-sharp cut.
+          </p>
+          <p>
+            We believe in doing things the old way — the right way. No appointments rushed,
+            no corners cut. Just genuine, unhurried craftsmanship delivered by hands that know
+            their trade. From the straight razor on the strop to the warm lather in the mug,
+            every visit feels like stepping back in time.
+          </p>
+          <p>
+            Whether you're a longtime local or just passing through the Pikes Peak region,
+            pull up a chair. You'll leave looking sharp and feeling like part of something
+            that matters.
+          </p>
+
+          <div class="about-features">
+            <div class="about-feature">
+              <div class="about-feature-dot"></div>
+              Traditional Hot Towel Service
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-dot"></div>
+              Classic Straight Razor Shaves
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-dot"></div>
+              Walk-Ins Always Welcome
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-dot"></div>
+              Family-Friendly Shop
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-dot"></div>
+              Old Colorado City Landmark
+            </div>
+            <div class="about-feature">
+              <div class="about-feature-dot"></div>
+              Honest, Fair Pricing
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       SERVICES
+  ════════════════════════════════ -->
+  <section id="services" aria-labelledby="services-heading">
+    <div class="container">
+      <div class="services-header reveal">
+        <span class="section-label">Services &amp; Pricing</span>
+        <h2 class="section-title" id="services-heading">The Full Bill of Fare</h2>
+        <div class="divider" style="margin-bottom: 20px;">
+          <div class="divider-icon">💈</div>
+        </div>
+        <p>Good barbering at honest prices — just like it oughta be.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Men's Haircut -->
+        <div class="service-card reveal stagger-1">
+          <span class="service-icon">✂️</span>
+          <h3 class="service-name">Men's Haircut</h3>
+          <p class="service-desc">A proper gentleman's cut, styled and finished with care. Scissor or clipper — your call, our expertise.</p>
+          <div class="service-footer">
+            <span class="service-price">$18</span>
+            <span class="service-tag">Most Popular</span>
+          </div>
+        </div>
+
+        <!-- Beard Trim -->
+        <div class="service-card reveal stagger-2">
+          <span class="service-icon">🧔</span>
+          <h3 class="service-name">Beard Trim</h3>
+          <p class="service-desc">Shape, line, and tame that beard into something worthy of a wanted poster. Clean lines guaranteed.</p>
+          <div class="service-footer">
+            <span class="service-price">$12</span>
+            <span class="service-tag">Quick &amp; Clean</span>
+          </div>
+        </div>
+
+        <!-- Straight Razor Shave -->
+        <div class="service-card reveal stagger-3">
+          <span class="service-icon">🪒</span>
+          <h3 class="service-name">Straight Razor Shave</h3>
+          <p class="service-desc">The full treatment — hot lather, warm towel, and a straight razor shave smooth enough to make history. Pure luxury.</p>
+          <div class="service-footer">
+            <span class="service-price">$20</span>
+            <span class="service-tag">Signature Service</span>
+          </div>
+        </div>
+
+        <!-- Flat Top -->
+        <div class="service-card reveal stagger-4">
+          <span class="service-icon">🎩</span>
+          <h3 class="service-name">Flat Top</h3>
+          <p class="service-desc">A true flat top demands a steady hand and a sharp eye. We've been leveling them out the right way for years.</p>
+          <div class="service-footer">
+            <span class="service-price">$20</span>
+            <span class="service-tag">Classic Style</span>
+          </div>
+        </div>
+
+        <!-- Kids Cut -->
+        <div class="service-card reveal stagger-5">
+          <span class="service-icon">⭐</span>
+          <h3 class="service-name">Kids Cut</h3>
+          <p class="service-desc">A patient, friendly cut for the young folks. We make it fun and send them out looking their best for school or Sunday.</p>
+          <div class="service-footer">
+            <span class="service-price">$14</span>
+            <span class="service-tag">Ages 12 &amp; Under</span>
+          </div>
+        </div>
+
+        <!-- Senior Cut -->
+        <div class="service-card reveal stagger-6">
+          <span class="service-icon">🏅</span>
+          <h3 class="service-name">Senior Cut</h3>
+          <p class="service-desc">Respect for our elders, reflected in the price. The same quality cut and personal touch — because you've earned it.</p>
+          <div class="service-footer">
+            <span class="service-price">$15</span>
+            <span class="service-tag">60+ Discount</span>
+          </div>
+        </div>
+
+        <!-- Neck Shave -->
+        <div class="service-card reveal stagger-7">
+          <span class="service-icon">💫</span>
+          <h3 class="service-name">Neck Shave</h3>
+          <p class="service-desc">Keep those edges sharp between cuts. A quick neck clean-up with a straight razor for a polished finish.</p>
+          <div class="service-footer">
+            <span class="service-price">$8</span>
+            <span class="service-tag">Quick Touch-Up</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add-on note -->
+      <div class="reveal" style="text-align:center; margin-top: 48px;">
+        <p style="font-family:var(--ff-accent); font-style:italic; color:var(--saddle); font-size:1rem;">
+          Walk-ins welcome — or call ahead at <a href="tel:+17193281135" style="color:var(--burgundy); font-weight:700;">(719) 328-1135</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       WHY CHOOSE US
+  ════════════════════════════════ -->
+  <section id="why" aria-labelledby="why-heading">
+    <div class="why-inner container">
+      <div class="why-header reveal">
+        <span class="section-label" style="color: var(--gold);">Why Randy's</span>
+        <h2 class="section-title" id="why-heading">The Old Way Is the Right Way</h2>
+        <div class="divider">
+          <div class="divider-icon">✦</div>
+        </div>
+        <p>We don't cut corners. We just cut hair.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card reveal stagger-1">
+          <div class="why-icon">⭐</div>
+          <div class="why-stat">20</div>
+          <div class="why-label">Yelp Reviews</div>
+          <p class="why-desc">Real neighbors, real opinions. Our reputation is built on honest word-of-mouth from the Colorado Springs community.</p>
+        </div>
+
+        <div class="why-card reveal stagger-2">
+          <div class="why-icon">🏛</div>
+          <div class="why-stat">Historic</div>
+          <div class="why-label">Old Colorado City</div>
+          <p class="why-desc">On the same stretch of West Colorado Ave where history happened. A neighborhood shop rooted in tradition and place.</p>
+        </div>
+
+        <div class="why-card reveal stagger-3">
+          <div class="why-icon">🪒</div>
+          <div class="why-stat">100%</div>
+          <div class="why-label">Traditional Methods</div>
+          <p class="why-desc">Straight razor, hot lather, warm towel — the timeless techniques that made barbering an art form, not a conveyor belt.</p>
+        </div>
+
+        <div class="why-card reveal stagger-4">
+          <div class="why-icon">💰</div>
+          <div class="why-stat">Fair</div>
+          <div class="why-label">Honest Pricing</div>
+          <p class="why-desc">Starting at $8. Premium experience without premium pretense. Good work at prices the whole family can appreciate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       TESTIMONIALS
+  ════════════════════════════════ -->
+  <section id="testimonials" aria-labelledby="testimonials-heading">
+    <div class="container">
+      <div class="testimonials-header reveal">
+        <span class="section-label" style="color: var(--gold);">Straight From the Locals</span>
+        <h2 class="section-title" id="testimonials-heading">What Folks Are Sayin'</h2>
+        <div class="divider" style="margin-bottom: 12px;">
+          <div class="divider-icon" style="color: var(--gold-light);">✦</div>
+        </div>
+        <div class="yelp-note">
+          <span class="yelp-stars">★★★★★</span>
+          <span>Rated on Yelp · 20 reviews · Old Colorado City</span>
+        </div>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card reveal stagger-1">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-platform">Yelp</div>
+          <div class="testimonial-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="testimonial-text">
+            "Randy's is the real deal. Walked in off Colorado Ave, walked out looking like I just stepped out of 1955 — and I mean that as the highest compliment. The straight razor shave alone is worth the trip. Best $20 I've spent in this city."
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">M</div>
+            <div>
+              <div class="testimonial-name">Mike T.</div>
+              <div class="testimonial-meta">Colorado Springs · Local Guide</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card reveal stagger-2">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-platform">Yelp</div>
+          <div class="testimonial-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="testimonial-text">
+            "Been taking my son here for two years. The barber is patient, kind, and the kid actually sits still for him — that alone is a miracle. Fair prices, genuine folks. This is what a neighborhood barbershop should feel like."
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">J</div>
+            <div>
+              <div class="testimonial-name">Jennifer R.</div>
+              <div class="testimonial-meta">Old Colorado City · Regular Customer</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card reveal stagger-3">
+          <div class="testimonial-quote-mark">"</div>
+          <div class="testimonial-platform">Yelp</div>
+          <div class="testimonial-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="testimonial-text">
+            "Moved here from Dallas two years ago and spent six months looking for a real barber shop. Found Randy's and never looked back. The flat top they give me is perfect every single time. Walk-ins welcome and the price is right. This place is a treasure."
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">D</div>
+            <div>
+              <div class="testimonial-name">David K.</div>
+              <div class="testimonial-meta">Colorado Springs · 2-Year Customer</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       FAQ
+  ════════════════════════════════ -->
+  <section id="faq" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="faq-header reveal">
+        <span class="section-label">Got Questions?</span>
+        <h2 class="section-title" id="faq-heading">The Curious Cowpoke's Guide</h2>
+        <div class="divider">
+          <div class="divider-icon">✂</div>
+        </div>
+        <p>Everything you need to know before you mosey on in.</p>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item reveal stagger-1">
+          <button class="faq-question" aria-expanded="false">
+            Do I need an appointment, or can I walk in?
+            <div class="faq-chevron" aria-hidden="true">▼</div>
+          </button>
+          <div class="faq-answer">
+            Walk-ins are always welcome at Randy's — that's the old-fashioned way and we wouldn't have it any other way. If you want to plan ahead or check wait times, give us a ring at <strong>(719) 328-1135</strong>. We'll let you know how busy it is so you can time your visit right.
+          </div>
+        </div>
+
+        <div class="faq-item reveal stagger-2">
+          <button class="faq-question" aria-expanded="false">
+            What's included in the straight razor shave?
+            <div class="faq-chevron" aria-hidden="true">▼</div>
+          </button>
+          <div class="faq-answer">
+            Our straight razor shave is the full traditional treatment: hot lather applied generously, a warm towel wrap to open the pores, a careful straight razor shave against the grain for maximum smoothness, a cool towel finish, and a touch of aftershave. It's a genuine luxury experience for just $20 — a ritual that used to define every man's week.
+          </div>
+        </div>
+
+        <div class="faq-item reveal stagger-3">
+          <button class="faq-question" aria-expanded="false">
+            What are your hours, and are you open on weekends?
+            <div class="faq-chevron" aria-hidden="true">▼</div>
+          </button>
+          <div class="faq-answer">
+            We're open Monday through Friday from <strong>8:00 AM to 5:00 PM</strong>, and Saturdays from <strong>8:00 AM to 3:00 PM</strong>. We are closed on Sundays — the Lord's day and the barber's day of rest. We recommend arriving at least 30 minutes before close to ensure we can take care of you properly.
+          </div>
+        </div>
+
+        <div class="faq-item reveal stagger-4">
+          <button class="faq-question" aria-expanded="false">
+            Do you cut kids' hair? What age is the kid's cut for?
+            <div class="faq-chevron" aria-hidden="true">▼</div>
+          </button>
+          <div class="faq-answer">
+            Absolutely — we love having the next generation in the chair. Our kid's cut is priced at $14 and is designed for children ages 12 and under. We're patient and friendly, and we've had plenty of practice making the experience enjoyable for young ones who might be nervous about the barber shop.
+          </div>
+        </div>
+
+        <div class="faq-item reveal stagger-5">
+          <button class="faq-question" aria-expanded="false">
+            Where exactly are you located, and is there parking nearby?
+            <div class="faq-chevron" aria-hidden="true">▼</div>
+          </button>
+          <div class="faq-answer">
+            We're at <strong>3436 W Colorado Ave, Colorado Springs, CO 80904</strong> — right in the heart of historic Old Colorado City. Street parking is generally available along West Colorado Avenue, and the neighborhood is very walkable. Look for us on the main drag — we're hard to miss. If you need directions, give us a call at <strong>(719) 328-1135</strong>.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       CONTACT
+  ════════════════════════════════ -->
+  <section id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="contact-header reveal">
+        <span class="section-label">Come On In</span>
+        <h2 class="section-title" id="contact-heading">Find Us on Colorado Ave</h2>
+        <div class="divider">
+          <div class="divider-icon">🏛</div>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- Info Column -->
+        <div class="contact-info reveal-left">
+          <h3>Randy's Olde Tyme Barber Shop</h3>
+
+          <div class="contact-detail">
+            <div class="contact-icon-wrap">📍</div>
+            <div class="contact-detail-text">
+              <h4>Address</h4>
+              <p>
+                3436 W Colorado Ave<br>
+                Colorado Springs, CO 80904<br>
+                <em style="font-size:0.8rem; color:#888;">Historic Old Colorado City</em>
+              </p>
+              <a href="https://maps.google.com/?q=3436+W+Colorado+Ave,+Colorado+Springs,+CO+80904" target="_blank" rel="noopener" style="font-size:0.8rem; color:var(--saddle); font-weight:600; display:inline-block; margin-top:6px;">
+                Get Directions →
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-icon-wrap">📞</div>
+            <div class="contact-detail-text">
+              <h4>Phone</h4>
+              <a href="tel:+17193281135" style="font-size:1.15rem; font-weight:700; color:var(--burgundy);">(719) 328-1135</a>
+              <p style="font-size:0.78rem; margin-top:4px; color:#777;">Call ahead to check wait times</p>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-icon-wrap">🕐</div>
+            <div class="contact-detail-text">
+              <h4>Hours of Operation</h4>
+              <div class="hours-table">
+                <div class="hours-row">
+                  <span class="hours-day">Monday – Friday</span>
+                  <span class="hours-time">8:00 AM – 5:00 PM</span>
+                </div>
+                <div class="hours-row">
+                  <span class="hours-day">Saturday</span>
+                  <span class="hours-time">8:00 AM – 3:00 PM</span>
+                </div>
+                <div class="hours-row">
+                  <span class="hours-day">Sunday</span>
+                  <span class="hours-closed">Closed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-icon-wrap">⭐</div>
+            <div class="contact-detail-text">
+              <h4>Find Us On Yelp</h4>
+              <a href="https://www.yelp.com/search?find_desc=Randy%27s+Olde+Tyme+Barber+Shop&find_loc=Colorado+Springs%2C+CO" target="_blank" rel="noopener" style="color:var(--saddle); font-weight:600;">
+                Randy's on Yelp →
+              </a>
+              <p style="font-size:0.78rem; margin-top:4px; color:#777;">20 reviews · 5 stars</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Column -->
+        <div class="contact-form-wrap reveal-right">
+          <h3>Send Us a Message</h3>
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" placeholder="Jesse" required />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" placeholder="James" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(719) 555-0100" />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="howdy@example.com" />
+            </div>
+
+            <div class="form-group">
+              <label for="service">Interested In</label>
+              <select id="service" name="service">
+                <option value="">— Select a service —</option>
+                <option value="haircut">Men's Haircut — $18</option>
+                <option value="beard">Beard Trim — $12</option>
+                <option value="shave">Straight Razor Shave — $20</option>
+                <option value="flattop">Flat Top — $20</option>
+                <option value="kids">Kids Cut — $14</option>
+                <option value="senior">Senior Cut — $15</option>
+                <option value="neck">Neck Shave — $8</option>
+                <option value="other">Something else / General question</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" name="message" placeholder="Ask us anything — questions, compliments, or requests..." rows="4"></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">
+              ✉ Send Your Message
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════
+       FOOTER
+  ════════════════════════════════ -->
+  <footer id="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <div class="footer-logo">Randy's ✂ Olde Tyme</div>
+          <p>
+            A traditional barber shop on historic West Colorado Avenue in Old Colorado City,
+            Colorado Springs. Honest cuts, old-school craft, community heart.
+          </p>
+          <a href="tel:+17193281135" class="footer-cta-btn">
+            📞 (719) 328-1135
+          </a>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#services">Services &amp; Prices</a></li>
+            <li><a href="#why">Why Randy's</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Find Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Hours -->
+        <div class="footer-col">
+          <h4>Hours</h4>
+          <p>
+            Mon – Fri<br>
+            <strong style="color:var(--gold-light);">8:00 AM – 5:00 PM</strong>
+          </p>
+          <br>
+          <p>
+            Saturday<br>
+            <strong style="color:var(--gold-light);">8:00 AM – 3:00 PM</strong>
+          </p>
+          <br>
+          <p>
+            Sunday<br>
+            <em style="color:rgba(244,236,216,0.35);">Closed</em>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="footer-bottom">
+        <p>© <span id="year"></span> Randy's Olde Tyme Barber Shop · 3436 W Colorado Ave, Colorado Springs, CO 80904</p>
+        <p class="credit">Website by <a href="https://kineticdigital.io" target="_blank" rel="noopener">Kinetic Digital</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════
+       JAVASCRIPT
+  ════════════════════════════════ -->
+  <script>
+    // ── Year ──────────────────────────────
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── Navbar scroll behavior ────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Mobile menu ───────────────────────
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileMenu();
+    });
+
+    // ── Scroll reveal ─────────────────────
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ── FAQ accordion ─────────────────────
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked (if wasn't open)
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // ── Contact form ─────────────────────
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      const original = btn.textContent;
+      btn.textContent = '✓ Message Received — We\'ll Be in Touch!';
+      btn.style.background = 'var(--saddle)';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.style.background = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 4000);
+    });
+
+    // ── Smooth stagger for trust bar ──────
+    document.querySelectorAll('#trust-bar .trust-item').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.1}s`;
+    });
+
+    // ── Active nav highlighting ───────────
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navAnchors.forEach(a => {
+            a.style.color = a.getAttribute('href') === `#${entry.target.id}`
+              ? 'var(--gold-light)' : '';
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => sectionObserver.observe(s));
+
+    // ── Parallax-lite on hero ──────────────
+    const heroContent = document.querySelector('.hero-content');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < window.innerHeight) {
+        heroContent.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
