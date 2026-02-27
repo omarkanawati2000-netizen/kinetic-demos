@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Squared Away — Military Uniform Services | Fountain, CO</title>
+  <meta name="description" content="Squared Away Military Uniform Services — Professional uniform alterations, rank & patch sewing, name tapes, and more. Serving Fort Carson, Peterson AFB, and Colorado Springs. Call (719) 698-5096." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===========================
+       CSS CUSTOM PROPERTIES
+    =========================== */
+    :root {
+      --od-green:     #3D4F2F;
+      --od-green-dk:  #2a3820;
+      --od-green-lt:  #506840;
+      --tac-black:    #1a1a1a;
+      --tac-black-lt: #242424;
+      --sand:         #C4B69C;
+      --sand-lt:      #d9cdb7;
+      --sand-dk:      #a89980;
+      --gold:         #BFA14A;
+      --gold-lt:      #d4b85e;
+      --gold-dk:      #9e8336;
+      --matte-white:  #F0EDE8;
+      --off-white:    #e8e4dd;
+      --text-dark:    #1a1a1a;
+      --text-light:   #F0EDE8;
+      --text-muted:   #8a8070;
+
+      --font-head: 'Barlow Condensed', sans-serif;
+      --font-body: 'Source Sans 3', sans-serif;
+
+      --nav-h: 70px;
+      --section-pad: clamp(4rem, 8vw, 7rem);
+      --container: 1160px;
+      --radius: 4px;
+      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===========================
+       RESET & BASE
+    =========================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--matte-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ===========================
+       UTILITY
+    =========================== */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    .section-label {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.05;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--gold);
+      color: var(--tac-black);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(191,161,74,0.35); }
+    .btn-primary:hover::after { opacity: 1; }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: transparent;
+      color: var(--matte-white);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border: 2px solid var(--sand);
+      border-radius: var(--radius);
+      transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+    }
+    .btn-outline:hover { background: var(--sand); color: var(--tac-black); border-color: var(--sand); transform: translateY(-2px); }
+
+    /* Star rating */
+    .stars { display: flex; gap: 2px; color: var(--gold); font-size: 1.1rem; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+    .delay-6 { transition-delay: 0.6s; }
+
+    /* ===========================
+       NAV
+    =========================== */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      background: rgba(26,26,26,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(191,161,74,0.2);
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+    #nav.scrolled {
+      background: rgba(26,26,26,0.99);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      gap: 2px;
+    }
+    .nav-logo-name {
+      font-family: var(--font-head);
+      font-weight: 900;
+      font-size: 1.45rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--matte-white);
+    }
+    .nav-logo-name span { color: var(--gold); }
+    .nav-logo-sub {
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sand);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .nav-links a {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sand);
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold); background: rgba(191,161,74,0.1); }
+
+    .nav-cta {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tac-black);
+      background: var(--gold);
+      padding: 0.5rem 1.2rem;
+      border-radius: var(--radius);
+      transition: background var(--transition), transform var(--transition);
+    }
+    .nav-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      padding: 4px;
+      z-index: 1100;
+    }
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--matte-white);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+    }
+    .hamburger span:nth-child(3) { width: 70%; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { width: 100%; transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      background: var(--tac-black);
+      border-top: 1px solid rgba(191,161,74,0.2);
+      border-bottom: 2px solid var(--gold);
+      z-index: 999;
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .mobile-menu.open {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sand);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      border-left: 3px solid transparent;
+      transition: color var(--transition), border-color var(--transition), background var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--gold); border-left-color: var(--gold); background: rgba(191,161,74,0.07); }
+    .mobile-menu-cta {
+      margin-top: 0.75rem;
+      background: var(--gold) !important;
+      color: var(--tac-black) !important;
+      text-align: center;
+      border-left: none !important;
+      justify-content: center;
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: var(--nav-h);
+      background: var(--od-green-dk);
+    }
+
+    /* Tactical grid background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        /* gradient overlay */
+        linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(61,79,47,0.85) 50%, rgba(26,26,26,0.98) 100%),
+        /* tactical crosshatch pattern */
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 39px,
+          rgba(191,161,74,0.06) 39px,
+          rgba(191,161,74,0.06) 40px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 39px,
+          rgba(191,161,74,0.06) 39px,
+          rgba(191,161,74,0.06) 40px
+        );
+      z-index: 0;
+    }
+
+    /* Diagonal accent stripe */
+    .hero-stripe {
+      position: absolute;
+      top: -20%;
+      right: -5%;
+      width: 45%;
+      height: 140%;
+      background: linear-gradient(to bottom, rgba(61,79,47,0.4), rgba(42,56,32,0.6));
+      transform: skewX(-8deg);
+      z-index: 1;
+      border-left: 1px solid rgba(191,161,74,0.15);
+    }
+
+    /* Corner accent marks */
+    .corner-tl, .corner-br {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      z-index: 2;
+      opacity: 0.5;
+    }
+    .corner-tl {
+      top: calc(var(--nav-h) + 20px);
+      left: 30px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+    }
+    .corner-br {
+      bottom: 20px;
+      right: 30px;
+      border-bottom: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      padding: var(--section-pad) 0;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow-line {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+    }
+    .hero-eyebrow-text {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-weight: 900;
+      font-size: clamp(4.5rem, 11vw, 9.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      line-height: 0.9;
+      color: var(--matte-white);
+      margin-bottom: 1rem;
+    }
+    .hero-title .gold-word { color: var(--gold); }
+
+    .hero-tagline {
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      letter-spacing: 0.05em;
+      color: var(--sand);
+      margin-bottom: 2.5rem;
+      max-width: 560px;
+      border-left: 3px solid var(--gold);
+      padding-left: 1rem;
+      line-height: 1.4;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .hero-call-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--gold);
+      color: var(--tac-black);
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1rem 2.25rem;
+      border-radius: var(--radius);
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(191,161,74,0.3);
+    }
+    .hero-call-btn:hover { background: var(--gold-lt); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(191,161,74,0.45); }
+    .hero-call-btn .phone-icon { font-size: 1.2rem; }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--sand);
+      text-transform: uppercase;
+    }
+    .hero-badge .check { color: var(--gold); font-size: 1rem; }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--sand);
+      opacity: 0.6;
+      animation: bounceDown 2s ease-in-out infinite;
+    }
+    .hero-scroll-hint span {
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ===========================
+       OFFER BANNER
+    =========================== */
+    #offer-banner {
+      background: var(--od-green);
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      padding: 1rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .banner-track {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 25s linear infinite;
+      white-space: nowrap;
+    }
+    .banner-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--matte-white);
+      flex-shrink: 0;
+    }
+    .banner-item .star { color: var(--gold); font-size: 1.2rem; }
+    .banner-highlight { color: var(--gold); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ===========================
+       ABOUT
+    =========================== */
+    #about {
+      padding: var(--section-pad) 0;
+      background: var(--matte-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-decor {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle at top right, rgba(61,79,47,0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+    .about-visual-box {
+      background: var(--od-green);
+      border-radius: var(--radius);
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-visual-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.08) 10px, rgba(0,0,0,0.08) 11px);
+    }
+    .about-visual-emblem {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+    }
+    .about-visual-emblem .big-icon {
+      font-size: 5rem;
+      display: block;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 4px 20px rgba(191,161,74,0.4));
+    }
+    .about-visual-emblem .emblem-name {
+      font-family: var(--font-head);
+      font-weight: 900;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--matte-white);
+      line-height: 1;
+    }
+    .about-visual-emblem .emblem-tagline {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-top: 0.5rem;
+    }
+
+    .about-visual-tag {
+      position: absolute;
+      bottom: -1.5rem;
+      right: -1.5rem;
+      background: var(--gold);
+      color: var(--tac-black);
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      line-height: 1.3;
+    }
+    .about-visual-tag span { display: block; font-size: 1.6rem; font-weight: 900; }
+
+    .about-content {}
+    .about-content .section-title { font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--tac-black); margin-bottom: 1.5rem; }
+
+    .about-content p {
+      font-size: 1.02rem;
+      color: #444;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .about-highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.75rem 1rem;
+      background: var(--off-white);
+      border-radius: var(--radius);
+      border-left: 3px solid var(--od-green);
+    }
+    .about-highlight-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .about-highlight-text {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--tac-black);
+    }
+    .about-highlight-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ===========================
+       SERVICES
+    =========================== */
+    #services {
+      padding: var(--section-pad) 0;
+      background: var(--tac-black);
+      position: relative;
+      overflow: hidden;
+    }
+    #services::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(191,161,74,0.03) 59px, rgba(191,161,74,0.03) 60px),
+        repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(191,161,74,0.03) 59px, rgba(191,161,74,0.03) 60px);
+      pointer-events: none;
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .services-header .section-title { font-size: clamp(2.2rem, 4vw, 3.5rem); color: var(--matte-white); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .service-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(191,161,74,0.15);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .service-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(191,161,74,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-card-icon { font-size: 2rem; margin-bottom: 0.85rem; display: block; }
+    .service-card-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--matte-white);
+      margin-bottom: 0.5rem;
+    }
+    .service-card-desc {
+      font-size: 0.87rem;
+      color: var(--sand);
+      line-height: 1.55;
+    }
+
+    .service-card.featured {
+      background: rgba(61,79,47,0.25);
+      border-color: rgba(191,161,74,0.35);
+    }
+    .service-card.featured::before { transform: scaleX(1); }
+    .service-card-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--tac-black);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ===========================
+       WHY CHOOSE US
+    =========================== */
+    #why {
+      padding: var(--section-pad) 0;
+      background: var(--od-green);
+      position: relative;
+      overflow: hidden;
+    }
+    #why::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(0,0,0,0.04) 20px,
+        rgba(0,0,0,0.04) 21px
+      );
+      pointer-events: none;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+    }
+
+    .why-content .section-title { font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--matte-white); margin-bottom: 1rem; }
+    .why-content .section-label { color: var(--sand); }
+    .why-content > p {
+      color: var(--sand-lt);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+
+    .why-points {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .why-point {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: rgba(0,0,0,0.2);
+      border-radius: var(--radius);
+      border: 1px solid rgba(191,161,74,0.2);
+    }
+    .why-point-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .why-point-text {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+      color: var(--matte-white);
+      text-transform: uppercase;
+    }
+    .why-point-sub { font-size: 0.82rem; color: var(--sand); font-weight: 400; text-transform: none; letter-spacing: 0; font-family: var(--font-body); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .stat-card {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(191,161,74,0.25);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .stat-card:hover { transform: translateY(-4px); background: rgba(0,0,0,0.35); }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+    .stat-number {
+      font-family: var(--font-head);
+      font-weight: 900;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .stat-label {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sand);
+    }
+
+    /* ===========================
+       TESTIMONIALS
+    =========================== */
+    #testimonials {
+      padding: var(--section-pad) 0;
+      background: var(--matte-white);
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .testimonials-header .section-title { font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--tac-black); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-family: var(--font-head);
+      font-size: 4rem;
+      color: rgba(61,79,47,0.12);
+      line-height: 1;
+    }
+
+    .testimonial-stars { margin-bottom: 1rem; }
+    .testimonial-text {
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: #333;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      border-top: 1px solid var(--off-white);
+      padding-top: 1rem;
+    }
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--od-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .author-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--tac-black);
+    }
+    .author-unit {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Yelp badge */
+    .yelp-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      padding: 1.25rem 2rem;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .yelp-logo {
+      font-family: var(--font-head);
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: #d32323;
+    }
+    .yelp-info { text-align: left; }
+    .yelp-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .yelp-rating-num {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--tac-black);
+    }
+    .yelp-count {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ===========================
+       TRUST BADGES
+    =========================== */
+    #trust {
+      padding: 3rem 0;
+      background: var(--tac-black-lt);
+      border-top: 1px solid rgba(191,161,74,0.15);
+      border-bottom: 1px solid rgba(191,161,74,0.15);
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .trust-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border: 1px solid rgba(191,161,74,0.15);
+      border-radius: var(--radius);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .trust-badge:hover { border-color: rgba(191,161,74,0.4); background: rgba(255,255,255,0.03); }
+    .trust-badge-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+    .trust-badge-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--matte-white);
+      margin-bottom: 0.3rem;
+    }
+    .trust-badge-sub { font-size: 0.78rem; color: var(--sand); line-height: 1.4; }
+
+    /* ===========================
+       FAQ
+    =========================== */
+    #faq {
+      padding: var(--section-pad) 0;
+      background: var(--matte-white);
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .faq-header .section-title { font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--tac-black); }
+
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .faq-item {
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #fff;
+      transition: box-shadow var(--transition);
+    }
+    .faq-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .faq-item.open { box-shadow: 0 4px 20px rgba(61,79,47,0.12); border-color: rgba(61,79,47,0.25); }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background var(--transition);
+    }
+    .faq-question:hover { background: var(--off-white); }
+    .faq-item.open .faq-question { background: var(--off-white); }
+
+    .faq-q-text {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      color: var(--tac-black);
+      line-height: 1.3;
+    }
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--od-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--matte-white);
+      font-size: 0.75rem;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--gold); color: var(--tac-black); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-answer-inner {
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+      border-top: 1px solid var(--off-white);
+      padding-top: 1rem;
+    }
+
+    /* ===========================
+       CONTACT
+    =========================== */
+    #contact {
+      padding: var(--section-pad) 0;
+      background: var(--tac-black);
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(191,161,74,0.03) 39px, rgba(191,161,74,0.03) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(191,161,74,0.03) 39px, rgba(191,161,74,0.03) 40px);
+      pointer-events: none;
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .contact-header .section-title { font-size: clamp(2.2rem, 4vw, 3.2rem); color: var(--matte-white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 5vw, 5rem);
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-info {}
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .contact-info-item:last-child { border-bottom: none; }
+    .contact-info-icon {
+      width: 42px;
+      height: 42px;
+      background: rgba(191,161,74,0.15);
+      border: 1px solid rgba(191,161,74,0.3);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .contact-info-label {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+    .contact-info-value {
+      font-size: 0.97rem;
+      color: var(--matte-white);
+      line-height: 1.5;
+    }
+    .contact-info-value a { color: var(--gold); transition: color var(--transition); }
+    .contact-info-value a:hover { color: var(--gold-lt); }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.25rem 1rem;
+      margin-top: 0.25rem;
+    }
+    .hours-day {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--sand);
+    }
+    .hours-time {
+      font-size: 0.88rem;
+      color: var(--matte-white);
+    }
+
+    /* Form */
+    .contact-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(191,161,74,0.15);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+    .form-title {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--matte-white);
+      margin-bottom: 1.5rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--sand);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      color: var(--matte-white);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      padding: 0.75rem 1rem;
+      transition: border-color var(--transition), background var(--transition);
+      outline: none;
+      -webkit-appearance: none;
+    }
+    .form-group select option { background: var(--tac-black); color: var(--matte-white); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 0 0 3px rgba(191,161,74,0.12);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(240,237,232,0.3); }
+
+    .form-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--tac-black);
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1rem;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .form-submit:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(191,161,74,0.3); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+    .form-success.show { display: block; }
+    .form-success-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .form-success-text {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .form-success-sub { font-size: 0.9rem; color: var(--sand); }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    #footer {
+      background: var(--od-green-dk);
+      border-top: 2px solid rgba(191,161,74,0.25);
+      padding: 2.5rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-logo-name {
+      font-family: var(--font-head);
+      font-weight: 900;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--matte-white);
+    }
+    .footer-logo-name span { color: var(--gold); }
+    .footer-tagline {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-top: 0.25rem;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+    .footer-links a {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sand);
+      padding: 0.35rem 0.7rem;
+      border-radius: var(--radius);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-credit {
+      font-size: 0.78rem;
+      color: var(--sand-dk);
+      text-align: right;
+    }
+    .footer-credit a { color: var(--gold); transition: color var(--transition); }
+    .footer-credit a:hover { color: var(--gold-lt); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(196,182,156,0.5);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      :root { --nav-h: 62px; }
+
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-title { font-size: clamp(3.5rem, 14vw, 6rem); }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .about-visual { order: -1; max-width: 380px; margin: 0 auto; }
+      .about-visual-tag { bottom: -1rem; right: -0.5rem; }
+
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .why-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .contact-grid { grid-template-columns: 1fr; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-credit { text-align: left; }
+    }
+
+    @media (max-width: 480px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       NAV
+  =========================== -->
+  <nav id="nav" role="navigation" aria-label="Main Navigation">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo" aria-label="Squared Away Home">
+          <span class="nav-logo-name">Squared <span>Away</span></span>
+          <span class="nav-logo-sub">Military Uniform Services</span>
+        </a>
+
+        <ul class="nav-links" role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a href="tel:+17196985096" class="nav-cta" aria-label="Call Us">📞 (719) 698-5096</a>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile Navigation">
+    <a href="#about" onclick="closeMobileMenu()">About</a>
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#why" onclick="closeMobileMenu()">Why Us</a>
+    <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="tel:+17196985096" class="mobile-menu-cta" onclick="closeMobileMenu()">📞 Call Now: (719) 698-5096</a>
+  </div>
+
+  <!-- ===========================
+       HERO
+  =========================== -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-bg"></div>
+    <div class="hero-stripe"></div>
+    <div class="corner-tl" aria-hidden="true"></div>
+    <div class="corner-br" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="container">
+
+        <div class="hero-eyebrow reveal">
+          <div class="hero-eyebrow-line"></div>
+          <span class="hero-eyebrow-text">Fort Carson · Peterson AFB · Colorado Springs</span>
+        </div>
+
+        <h1 class="hero-title reveal delay-1">
+          Squared<br /><span class="gold-word">Away</span>
+        </h1>
+
+        <p class="hero-tagline reveal delay-2">
+          Military Uniform Services —<br />Specializing on the Standard
+        </p>
+
+        <div class="hero-actions reveal delay-3">
+          <a href="tel:+17196985096" class="hero-call-btn" aria-label="Call Squared Away at (719) 698-5096">
+            <span class="phone-icon">📞</span>
+            (719) 698-5096
+          </a>
+          <a href="#services" class="btn-outline">View Services</a>
+        </div>
+
+        <div class="hero-badges reveal delay-4">
+          <div class="hero-badge"><span class="check">✓</span> Uniform Alterations</div>
+          <div class="hero-badge"><span class="check">✓</span> Rank & Patch Sewing</div>
+          <div class="hero-badge"><span class="check">✓</span> Rush / Same-Day</div>
+          <div class="hero-badge"><span class="check">✓</span> 100% Positive Reviews</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <svg width="16" height="20" viewBox="0 0 16 20" fill="none">
+        <path d="M8 2v16M2 12l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===========================
+       OFFER BANNER
+  =========================== -->
+  <section id="offer-banner" aria-label="Special Offer">
+    <div class="banner-track" aria-hidden="true">
+      <!-- Duplicated for seamless loop -->
+      <div class="banner-item"><span class="star">★</span> <span class="banner-highlight">20% OFF</span> for First-Time Customers! <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> Grand Opening Special — January 2026 <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> <span class="banner-highlight">20% OFF</span> for First-Time Customers! <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> Serving Fort Carson &amp; Peterson AFB <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> <span class="banner-highlight">20% OFF</span> for First-Time Customers! <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> Rush &amp; Same-Day Service Available <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> <span class="banner-highlight">20% OFF</span> for First-Time Customers! <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> 100% Positive Yelp Ratings <span class="star">★</span></div>
+      <!-- Duplicate set -->
+      <div class="banner-item"><span class="star">★</span> <span class="banner-highlight">20% OFF</span> for First-Time Customers! <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> Grand Opening Special — January 2026 <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> <span class="banner-highlight">20% OFF</span> for First-Time Customers! <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> Serving Fort Carson &amp; Peterson AFB <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> <span class="banner-highlight">20% OFF</span> for First-Time Customers! <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> Rush &amp; Same-Day Service Available <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> <span class="banner-highlight">20% OFF</span> for First-Time Customers! <span class="star">★</span></div>
+      <div class="banner-item"><span class="star">★</span> 100% Positive Yelp Ratings <span class="star">★</span></div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       ABOUT
+  =========================== -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="about-decor" aria-hidden="true"></div>
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-visual reveal-left">
+          <div class="about-visual-box">
+            <div class="about-visual-emblem">
+              <span class="big-icon">🎖️</span>
+              <div class="emblem-name">Squared Away</div>
+              <div class="emblem-tagline">Est. January 2026 · Fountain, CO</div>
+            </div>
+          </div>
+          <div class="about-visual-tag">
+            <span>12</span>
+            Yelp Reviews<br />All 5 Stars
+          </div>
+        </div>
+
+        <div class="about-content reveal-right">
+          <p class="section-label">Our Story</p>
+          <h2 id="about-heading" class="section-title" style="font-size: clamp(2.2rem, 4vw, 3.2rem); margin-bottom: 1.5rem;">
+            Born from a<br />passion for the<br /><span style="color:var(--od-green);">Standard</span>
+          </h2>
+
+          <p>
+            Squared Away opened its doors in January 2026 right here in Fountain, Colorado — steps from the gate, built for the mission. We're part of the same military community we serve: Fort Carson soldiers, Peterson AFB Airmen, and the broader Colorado Springs military family.
+          </p>
+          <p>
+            We understand what it means to look sharp on PT day, pass a uniform inspection, or walk into a formal event with dress blues pressed to perfection. Every stitch we place is made with military standards in mind — because we know how much it matters.
+          </p>
+          <p>
+            Whether it's a quick name tape or a full dress uniform prep, we treat every job like orders: with precision, speed, and pride.
+          </p>
+
+          <div class="about-highlights">
+            <div class="about-highlight-item">
+              <span class="about-highlight-icon">🏠</span>
+              <div>
+                <div class="about-highlight-text">Local & Community-Rooted</div>
+                <div class="about-highlight-sub">Located in Fountain, CO — minutes from Fort Carson & Peterson AFB</div>
+              </div>
+            </div>
+            <div class="about-highlight-item">
+              <span class="about-highlight-icon">⭐</span>
+              <div>
+                <div class="about-highlight-text">100% Positive Reviews</div>
+                <div class="about-highlight-sub">12 five-star Yelp ratings since grand opening</div>
+              </div>
+            </div>
+            <div class="about-highlight-item">
+              <span class="about-highlight-icon">🎯</span>
+              <div>
+                <div class="about-highlight-text">Military Precision Standards</div>
+                <div class="about-highlight-sub">We know AR 670-1 and AFI 36-2903 — your uniform will be right</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SERVICES
+  =========================== -->
+  <section id="services" aria-labelledby="services-heading">
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="services-header reveal">
+        <p class="section-label">What We Do</p>
+        <h2 id="services-heading" class="section-title">Services</h2>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card featured reveal delay-1">
+          <span class="service-card-badge">Most Popular</span>
+          <span class="service-card-icon">🪡</span>
+          <div class="service-card-title">Uniform Alterations & Tailoring</div>
+          <p class="service-card-desc">Expert alterations for Army ACU/OCP, Air Force ABU/OCP, and all service uniforms. Precision fit that meets regs.</p>
+        </div>
+
+        <div class="service-card reveal delay-2">
+          <span class="service-card-icon">🎖️</span>
+          <div class="service-card-title">Rank & Patch Sewing</div>
+          <p class="service-card-desc">Proper placement and secure attachment of rank insignia, unit patches, and combat patches per military regulation.</p>
+        </div>
+
+        <div class="service-card reveal delay-3">
+          <span class="service-card-icon">🏷️</span>
+          <div class="service-card-title">Name Tape & Branch Tape Service</div>
+          <p class="service-card-desc">Professional sewing of name tapes and branch tapes. Straight, centered, regulation-compliant every time.</p>
+        </div>
+
+        <div class="service-card reveal delay-4">
+          <span class="service-card-icon">📐</span>
+          <div class="service-card-title">Hemming & Fitting</div>
+          <p class="service-card-desc">Trouser hemming, sleeve adjustments, and full-garment fitting so your uniform looks tailored and professional.</p>
+        </div>
+
+        <div class="service-card reveal delay-1">
+          <span class="service-card-icon">🛡️</span>
+          <div class="service-card-title">Unit Patches & Insignia</div>
+          <p class="service-card-desc">Sewing of divisional patches, Special Forces tabs, Ranger tabs, and all authorized unit insignia.</p>
+        </div>
+
+        <div class="service-card reveal delay-2">
+          <span class="service-card-icon">👔</span>
+          <div class="service-card-title">Dress Uniform Preparation</div>
+          <p class="service-card-desc">Full dress uniform prep for formal events, promotions, retirements, and ceremonies. You'll stand at attention and look the part.</p>
+        </div>
+
+        <div class="service-card reveal delay-3">
+          <span class="service-card-icon">✂️</span>
+          <div class="service-card-title">Custom Sewing & Embroidery</div>
+          <p class="service-card-desc">Beyond uniforms — morale patches, custom embroidery, unit gifts, and specialty sewing projects.</p>
+        </div>
+
+        <div class="service-card featured reveal delay-4">
+          <span class="service-card-badge">Available Now</span>
+          <span class="service-card-icon">⚡</span>
+          <div class="service-card-title">Rush / Same-Day Service</div>
+          <p class="service-card-desc">When you need it done yesterday — our rush service gets you back in the fight, fast. Call ahead to confirm availability.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       WHY CHOOSE US
+  =========================== -->
+  <section id="why" aria-labelledby="why-heading">
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="why-grid">
+
+        <div class="why-content">
+          <p class="section-label reveal">Why Squared Away</p>
+          <h2 id="why-heading" class="section-title reveal delay-1">
+            Held to the<br />Highest<br />Standard
+          </h2>
+          <p class="reveal delay-2">
+            We opened because we saw a gap: service members needed a dedicated, reliable uniform shop that actually understands military life. Not a dry cleaner who also does alterations — a shop built specifically for you.
+          </p>
+          <div class="why-points">
+            <div class="why-point reveal delay-3">
+              <span class="why-point-icon">🎯</span>
+              <div>
+                <div class="why-point-text">Regulation-Accurate</div>
+                <div class="why-point-sub">Every alteration and patch placement follows current Army, Air Force, and joint service uniform regulations</div>
+              </div>
+            </div>
+            <div class="why-point reveal delay-4">
+              <span class="why-point-icon">⚡</span>
+              <div>
+                <div class="why-point-text">Fast Turnaround</div>
+                <div class="why-point-sub">We respect your schedule. Most jobs same-day or next-day. Rush service when you need it</div>
+              </div>
+            </div>
+            <div class="why-point reveal delay-5">
+              <span class="why-point-icon">🤝</span>
+              <div>
+                <div class="why-point-text">Community First</div>
+                <div class="why-point-sub">We're your neighbors. Fort Carson and Peterson AFB — we live this community every day</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card reveal delay-1">
+            <span class="stat-number">100%</span>
+            <div class="stat-label">Positive Reviews on Yelp</div>
+          </div>
+          <div class="stat-card reveal delay-2">
+            <span class="stat-number">12</span>
+            <div class="stat-label">5-Star Yelp Ratings</div>
+          </div>
+          <div class="stat-card reveal delay-3">
+            <span class="stat-number">8+</span>
+            <div class="stat-label">Services Offered</div>
+          </div>
+          <div class="stat-card reveal delay-4">
+            <span class="stat-number">20%</span>
+            <div class="stat-label">Off for First-Time Customers</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       TESTIMONIALS
+  =========================== -->
+  <section id="testimonials" aria-labelledby="testimonials-heading">
+    <div class="container">
+      <div class="testimonials-header reveal">
+        <p class="section-label">From the Community</p>
+        <h2 id="testimonials-heading" class="section-title">What Service Members Say</h2>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card reveal delay-1">
+          <div class="testimonial-stars stars" aria-label="5 stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Had my whole OCP kit patched up before a last-minute inspection. They got name tapes, rank, and unit patch all squared away in one visit. Everything was placed perfectly. Will not go anywhere else."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">JS</div>
+            <div>
+              <div class="author-name">SPC James S.</div>
+              <div class="author-unit">U.S. Army · Fort Carson, CO</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal delay-2">
+          <div class="testimonial-stars stars" aria-label="5 stars">★★★★★</div>
+          <p class="testimonial-text">
+            "I needed my blues prepped for a promotion ceremony the next morning. Called them, came in, and they had it done same day. Fit was perfect. These folks are the real deal — they clearly understand military standards."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">MR</div>
+            <div>
+              <div class="author-name">SSgt Maria R.</div>
+              <div class="author-unit">U.S. Air Force · Peterson AFB, CO</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal delay-3">
+          <div class="testimonial-stars stars" aria-label="5 stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Finally a uniform shop that knows exactly what they're doing. Hemmed my trousers to the right length, sewed on my patches in the right spot, and had everything done fast. Prices are fair too. Highly recommend."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">DW</div>
+            <div>
+              <div class="author-name">CPL David W.</div>
+              <div class="author-unit">U.S. Army · Fort Carson, CO</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="yelp-badge reveal" style="margin-top:2.5rem;">
+        <div class="yelp-logo">yelp</div>
+        <div class="yelp-info">
+          <div class="yelp-rating">
+            <span class="yelp-rating-num">5.0</span>
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+          </div>
+          <div class="yelp-count">Based on 12 reviews — 100% Positive</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===========================
+       TRUST BADGES
+  =========================== -->
+  <section id="trust" aria-label="Trust Indicators">
+    <div class="container">
+      <div class="trust-grid">
+
+        <div class="trust-badge reveal delay-1">
+          <span class="trust-badge-icon">🎖️</span>
+          <div class="trust-badge-title">Military Standard</div>
+          <div class="trust-badge-sub">Every alteration meets current service regulations and uniform standards</div>
+        </div>
+
+        <div class="trust-badge reveal delay-2">
+          <span class="trust-badge-icon">⚡</span>
+          <div class="trust-badge-title">Fast Turnaround</div>
+          <div class="trust-badge-sub">Same-day and next-day service available — because military life doesn't wait</div>
+        </div>
+
+        <div class="trust-badge reveal delay-3">
+          <span class="trust-badge-icon">✅</span>
+          <div class="trust-badge-title">100% Satisfaction</div>
+          <div class="trust-badge-sub">12 five-star Yelp reviews since opening — we stand behind every stitch</div>
+        </div>
+
+        <div class="trust-badge reveal delay-4">
+          <span class="trust-badge-icon">🤝</span>
+          <div class="trust-badge-title">Veteran Community</div>
+          <div class="trust-badge-sub">Proudly serving Fort Carson, Peterson AFB, and the Colorado Springs military family</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FAQ
+  =========================== -->
+  <section id="faq" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="faq-header reveal">
+        <p class="section-label">Need Answers?</p>
+        <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-list" role="list">
+
+        <div class="faq-item reveal delay-1" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            <span class="faq-q-text">How long does a typical alteration take?</span>
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Most standard alterations — hemming, patch sewing, name tapes — are completed same-day or within 24 hours. Larger jobs like full dress uniform prep may take 1–2 days. For time-sensitive orders, call ahead at <a href="tel:+17196985096" style="color:var(--od-green);font-weight:600;">(719) 698-5096</a> and we'll do our best to accommodate you.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-2" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Do you accept walk-ins?</span>
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Yes! Walk-ins are welcome during business hours. For rush or same-day requests, we do recommend calling ahead to confirm availability so we can have everything ready and prioritize your order.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-3" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            <span class="faq-q-text">What uniform types do you work on?</span>
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              We work on all current U.S. military uniforms including Army OCP, Air Force OCP, Army Service Uniform (ASU), Air Force Service Dress, Marine Corps uniforms, Navy uniforms, and more. We're also happy to handle civilian clothing alterations and custom sewing projects.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-4" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Do you offer rush or same-day service?</span>
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Absolutely. Rush and same-day service is available based on current workload. Call us at <a href="tel:+17196985096" style="color:var(--od-green);font-weight:600;">(719) 698-5096</a> before coming in and we'll let you know what's possible. We know military schedules don't always give you advance notice — we'll work with you.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-5" role="listitem">
+          <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+            <span class="faq-q-text">How is pricing determined?</span>
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq-answer" role="region">
+            <div class="faq-answer-inner">
+              Pricing depends on the type and complexity of work. Simple jobs like individual patch sewing or hem adjustments start at very affordable rates. We're always transparent about costs upfront — no surprises. And don't forget: first-time customers receive <strong>20% off</strong> their entire order!
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       CONTACT
+  =========================== -->
+  <section id="contact" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="contact-header reveal">
+        <p class="section-label">Get in Touch</p>
+        <h2 id="contact-heading" class="section-title">Come See Us</h2>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="contact-info">
+
+          <div class="contact-info-item reveal delay-1">
+            <div class="contact-info-icon" aria-hidden="true">📍</div>
+            <div>
+              <div class="contact-info-label">Location</div>
+              <div class="contact-info-value">
+                6869 Mesa Ridge Pkwy<br />
+                Fountain, CO 80817<br />
+                <a href="https://maps.google.com/?q=6869+Mesa+Ridge+Pkwy,+Fountain,+CO+80817" target="_blank" rel="noopener noreferrer" style="font-size:0.85rem;margin-top:0.3rem;display:inline-block;">
+                  📌 Get Directions →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-info-item reveal delay-2">
+            <div class="contact-info-icon" aria-hidden="true">📞</div>
+            <div>
+              <div class="contact-info-label">Phone</div>
+              <div class="contact-info-value">
+                <a href="tel:+17196985096">(719) 698-5096</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-info-item reveal delay-3">
+            <div class="contact-info-icon" aria-hidden="true">🕐</div>
+            <div>
+              <div class="contact-info-label">Hours of Operation</div>
+              <div class="contact-info-value">
+                <div class="hours-grid">
+                  <div class="hours-day">Mon – Fri</div>
+                  <div class="hours-time">9:00 AM – 6:00 PM</div>
+                  <div class="hours-day">Saturday</div>
+                  <div class="hours-time">10:00 AM – 4:00 PM</div>
+                  <div class="hours-day">Sunday</div>
+                  <div class="hours-time">Closed</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-info-item reveal delay-4">
+            <div class="contact-info-icon" aria-hidden="true">📍</div>
+            <div>
+              <div class="contact-info-label">Serving</div>
+              <div class="contact-info-value">
+                Fort Carson · Peterson Space Force Base<br />
+                Schriever SFB · Colorado Springs &amp; Surrounding Areas
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="reveal delay-2">
+          <form class="contact-form" id="contactForm" onsubmit="handleFormSubmit(event)" novalidate>
+            <div class="form-title">Request a Quote</div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="form-name">Your Name *</label>
+                <input type="text" id="form-name" name="name" placeholder="Sgt. Smith" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="form-phone">Phone Number</label>
+                <input type="tel" id="form-phone" name="phone" placeholder="(719) 000-0000" autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="form-service">Service Needed *</label>
+              <select id="form-service" name="service" required>
+                <option value="" disabled selected>Select a service…</option>
+                <option value="alterations">Uniform Alterations &amp; Tailoring</option>
+                <option value="rank-patch">Rank &amp; Patch Sewing</option>
+                <option value="name-tape">Name Tape &amp; Branch Tape</option>
+                <option value="hemming">Hemming &amp; Fitting</option>
+                <option value="unit-patches">Unit Patches &amp; Insignia</option>
+                <option value="dress-uniform">Dress Uniform Preparation</option>
+                <option value="embroidery">Custom Sewing &amp; Embroidery</option>
+                <option value="rush">Rush / Same-Day Service</option>
+                <option value="other">Other / Multiple Services</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="form-message">Details / Notes</label>
+              <textarea id="form-message" name="message" placeholder="Describe your uniform needs, timeline, or any special requirements…"></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">
+              <span>📨</span> Send Request
+            </button>
+
+            <div class="form-success" id="formSuccess">
+              <div class="form-success-icon">✅</div>
+              <div class="form-success-text">Message Received!</div>
+              <div class="form-success-sub">We'll be in touch shortly. For urgent needs, call us directly at (719) 698-5096.</div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FOOTER
+  =========================== -->
+  <footer id="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+
+        <div>
+          <div class="footer-logo-name">Squared <span>Away</span></div>
+          <div class="footer-tagline">Military Uniform Services · Fountain, CO</div>
+        </div>
+
+        <nav class="footer-links" aria-label="Footer Navigation">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#why">Why Us</a>
+          <a href="#testimonials">Reviews</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="footer-credit">
+          <div><a href="tel:+17196985096">(719) 698-5096</a></div>
+          <div style="margin-top:0.4rem;">6869 Mesa Ridge Pkwy, Fountain, CO 80817</div>
+          <div style="margin-top:0.75rem;">Website by <a href="#" aria-label="Kinetic Digital">Kinetic Digital</a></div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 Squared Away Military Uniform Services. All rights reserved. &nbsp;·&nbsp; Serving Fort Carson, Peterson Space Force Base & the Colorado Springs Military Community.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===========================
+       JAVASCRIPT
+  =========================== -->
+  <script>
+    // ── Nav: scroll class ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Hamburger / Mobile Menu ──
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      if (isOpen) {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    function closeMobileMenu() {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+    // ── Scroll Reveal ──
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── FAQ Accordion ──
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+
+      // Open clicked (if wasn't open)
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // ── Contact Form ──
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('contactForm');
+      const success = document.getElementById('formSuccess');
+
+      // Simple validation
+      const name = form.querySelector('#form-name').value.trim();
+      const service = form.querySelector('#form-service').value;
+      if (!name || !service) {
+        alert('Please fill in your name and select a service.');
+        return;
+      }
+
+      // Show success (in production, replace with real form submission)
+      form.querySelector('.form-submit').style.display = 'none';
+      success.classList.add('show');
+
+      // Reset after 5s
+      setTimeout(() => {
+        form.reset();
+        form.querySelector('.form-submit').style.display = 'flex';
+        success.classList.remove('show');
+      }, 6000);
+    }
+
+    // ── Smooth nav highlight on scroll ──
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+      });
+    }, { passive: true });
+
+    // ── Counter animation for stats ──
+    function animateCounter(el, target, duration = 1500, suffix = '') {
+      const start = 0;
+      const startTime = performance.now();
+      const isPercent = target === 100;
+
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(start + (target - start) * eased);
+        el.textContent = value + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target.querySelector('.stat-number');
+          if (!el) return;
+          const text = el.textContent;
+          const num = parseInt(text.replace(/[^0-9]/g, ''));
+          const suffix = text.replace(/[0-9]/g, '');
+          animateCounter(el, num, 1400, suffix);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-card').forEach(card => statObserver.observe(card));
+  </script>
+
+</body>
+</html>
