@@ -3,117 +3,1200 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Galaxy Smoke Shop – Elevate Your Experience | Colorado Springs</title>
-  <meta name="description" content="Galaxy Smoke Shop at 3960 Maizeland Rd, Colorado Springs. Premium glass pieces, vaporizers, CBD, kratom & more. Mon–Sat 9AM–9PM, Sun 10AM–7PM." />
+  <title>Galaxy Smoke Shop — Elevate Your Experience | Colorado Springs</title>
+  <meta name="description" content="Galaxy Smoke Shop at 3960 Maizeland Rd, Colorado Springs, CO. Premium glass, vaporizers, CBD, kratom & more. Mon-Sat 9AM-9PM, Sun 10AM-7PM." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <style>
-    /* ===== CSS VARIABLES ===== */
+    /* =============================================
+       CSS VARIABLES & RESET
+    ============================================= */
     :root {
       --bg:        #0D0B1E;
-      --bg2:       #13102E;
-      --bg3:       #1A1640;
+      --bg2:       #100E28;
+      --bg3:       #0A0817;
       --cyan:      #00E5FF;
       --magenta:   #FF1493;
       --white:     #F0F0F0;
-      --muted:     #9090B0;
-      --cyan-glow: 0 0 8px #00E5FF, 0 0 25px #00E5FF88, 0 0 60px #00E5FF33;
-      --mag-glow:  0 0 8px #FF1493, 0 0 25px #FF149388, 0 0 60px #FF149333;
-      --card-bg:   rgba(19, 16, 46, 0.85);
-      --border:    rgba(0, 229, 255, 0.18);
+      --muted:     #8888AA;
+      --card:      rgba(255,255,255,0.04);
+      --border:    rgba(0,229,255,0.15);
+      --border-mg: rgba(255,20,147,0.2);
+      --glow-c:    0 0 20px rgba(0,229,255,0.5), 0 0 60px rgba(0,229,255,0.2);
+      --glow-m:    0 0 20px rgba(255,20,147,0.5), 0 0 60px rgba(255,20,147,0.2);
+      --glow-soft: 0 0 40px rgba(0,229,255,0.12);
       --font-head: 'Rajdhani', sans-serif;
       --font-body: 'Poppins', sans-serif;
+      --nav-h:     72px;
+      --radius:    8px;
+      --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
     }
 
-    /* ===== RESET & BASE ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       background: var(--bg);
       color: var(--white);
       font-family: var(--font-body);
-      font-weight: 400;
+      font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    a { color: var(--cyan); text-decoration: none; }
-    img { display: block; max-width: 100%; }
+    ::selection { background: var(--magenta); color: #fff; }
 
-    /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--magenta); border-radius: 3px; }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg3); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px; }
 
-    /* ===== NEON SCANLINE OVERLAY ===== */
-    body::before {
+    /* =============================================
+       UTILITY CLASSES
+    ============================================= */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-sm { padding: 60px 0; }
+
+    .label {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+      position: relative;
+      padding-left: 32px;
+    }
+    .label::before {
       content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      width: 24px; height: 1px;
+      background: var(--cyan);
+      box-shadow: var(--glow-c);
+    }
+
+    .heading {
+      font-family: var(--font-head);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+    }
+    .heading-xl { font-size: clamp(48px, 8vw, 96px); }
+    .heading-lg { font-size: clamp(36px, 5vw, 56px); }
+    .heading-md { font-size: clamp(28px, 4vw, 40px); }
+
+    .cyan { color: var(--cyan); }
+    .magenta { color: var(--magenta); }
+
+    .neon-text-c {
+      color: var(--cyan);
+      text-shadow: 0 0 10px var(--cyan), 0 0 30px rgba(0,229,255,0.5);
+    }
+    .neon-text-m {
+      color: var(--magenta);
+      text-shadow: 0 0 10px var(--magenta), 0 0 30px rgba(255,20,147,0.5);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn:hover::before { opacity: 1; }
+
+    .btn-primary {
+      background: var(--cyan);
+      color: var(--bg);
+      box-shadow: var(--glow-c);
+    }
+    .btn-primary::before { background: rgba(255,255,255,0.15); }
+    .btn-primary:hover { box-shadow: 0 0 30px rgba(0,229,255,0.8), 0 0 80px rgba(0,229,255,0.3); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--magenta);
+      border: 1.5px solid var(--magenta);
+      box-shadow: var(--glow-m);
+    }
+    .btn-outline::before { background: rgba(255,20,147,0.1); }
+    .btn-outline:hover { box-shadow: 0 0 30px rgba(255,20,147,0.8), 0 0 80px rgba(255,20,147,0.3); transform: translateY(-2px); }
+
+    /* =============================================
+       ANIMATED BACKGROUND GRID
+    ============================================= */
+    .grid-bg {
       position: fixed;
       inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .grid-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,229,255,0.06) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255,20,147,0.06) 0%, transparent 60%);
+    }
+
+    /* =============================================
+       FLOATING PARTICLES
+    ============================================= */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.5; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 1000;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    #nav.scrolled {
+      background: rgba(13,11,30,0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,229,255,0.1), 0 4px 30px rgba(0,0,0,0.5);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 38px; height: 38px;
+      flex-shrink: 0;
+    }
+    .nav-logo-text {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+    .nav-logo-text span { color: var(--cyan); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 100%;
+      height: 1px;
+      background: var(--cyan);
+      box-shadow: var(--glow-c);
+      transition: right 0.3s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a:hover::after { right: 0; }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 26px; height: 2px;
+      background: var(--cyan);
+      transition: all 0.3s;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0; bottom: 0;
+      background: rgba(10,8,23,0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      list-style: none;
+      padding: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu li a {
+      font-family: var(--font-head);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+    .mobile-menu li a:hover {
+      color: var(--cyan);
+      text-shadow: var(--glow-c);
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: var(--nav-h);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 100% 60% at 50% -10%, rgba(0,229,255,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 50% at 100% 80%, rgba(255,20,147,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 0% 60%, rgba(0,229,255,0.07) 0%, transparent 50%);
+    }
+
+    .hero-scanlines {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
       background: repeating-linear-gradient(
         0deg,
         transparent,
         transparent 2px,
-        rgba(0,229,255,0.015) 2px,
-        rgba(0,229,255,0.015) 4px
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
       );
-      pointer-events: none;
-      z-index: 9999;
     }
 
-    /* ===== NOISE TEXTURE ===== */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9998;
-      opacity: 0.4;
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
     }
 
-    /* ===== UTILITY ===== */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    .section-pad { padding: 100px 0; }
-    .section-pad-sm { padding: 70px 0; }
-
-    .section-label {
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 100px;
+      padding: 8px 20px;
+      margin-bottom: 32px;
       font-family: var(--font-head);
-      font-size: 0.8rem;
-      letter-spacing: 0.4em;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--cyan);
-      margin-bottom: 12px;
-      display: block;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: var(--glow-c);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
     }
 
-    .section-title {
+    .hero-title {
       font-family: var(--font-head);
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-size: clamp(52px, 10vw, 110px);
       font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: 0.02em;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+    .hero-title .line1 { display: block; color: var(--white); }
+    .hero-title .line2 {
+      display: block;
+      color: var(--cyan);
+      text-shadow: 0 0 20px rgba(0,229,255,0.6), 0 0 60px rgba(0,229,255,0.3), 0 0 120px rgba(0,229,255,0.1);
+      animation: neonFlicker 8s ease-in-out infinite;
+    }
+    @keyframes neonFlicker {
+      0%, 95%, 100% { opacity: 1; }
+      96% { opacity: 0.85; }
+      97% { opacity: 1; }
+      98% { opacity: 0.9; }
+    }
+
+    .hero-tagline {
+      font-family: var(--font-head);
+      font-size: clamp(18px, 3vw, 28px);
+      font-weight: 500;
+      letter-spacing: 6px;
       text-transform: uppercase;
+      color: var(--magenta);
+      text-shadow: 0 0 20px rgba(255,20,147,0.5);
+      margin-bottom: 40px;
     }
 
-    .section-title span { color: var(--cyan); }
-    .section-title .mag { color: var(--magenta); }
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(240,240,240,0.6);
+      max-width: 520px;
+      margin-bottom: 48px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
 
-    .text-center { text-align: center; }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
 
-    /* Neon divider */
-    .neon-line {
+    .btn-call {
+      background: linear-gradient(135deg, var(--magenta), #c0006e);
+      color: #fff;
+      box-shadow: var(--glow-m);
+    }
+    .btn-call:hover {
+      box-shadow: 0 0 30px rgba(255,20,147,0.9), 0 0 80px rgba(255,20,147,0.4);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-scroll-text {
+      font-family: var(--font-head);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--cyan), transparent);
+      animation: scrollDrop 2s ease-in-out infinite;
+    }
+    @keyframes scrollDrop {
+      0%, 100% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+      30% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      60% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+      90% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* Decorative orb */
+    .hero-orb {
+      position: absolute;
+      right: -100px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+      border: 1px solid rgba(0,229,255,0.1);
+      animation: orbPulse 6s ease-in-out infinite;
+      z-index: 1;
+    }
+    .hero-orb::before {
+      content: '';
+      position: absolute;
+      inset: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,20,147,0.15);
+      animation: orbPulse 6s ease-in-out infinite reverse;
+    }
+    .hero-orb::after {
+      content: '';
+      position: absolute;
+      inset: 100px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,229,255,0.2);
+      animation: orbPulse 4s ease-in-out infinite;
+    }
+    @keyframes orbPulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+
+    /* =============================================
+       TRUST BADGES BAR
+    ============================================= */
+    #trust {
+      position: relative;
+      z-index: 1;
+      background: rgba(0,229,255,0.04);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
+    }
+    .trust-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .trust-icon {
+      width: 40px; height: 40px;
+      color: var(--cyan);
+      flex-shrink: 0;
+    }
+    .trust-label {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .trust-sublabel {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
+    /* =============================================
+       ABOUT
+    ============================================= */
+    #about {
+      position: relative;
+      z-index: 1;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    }
+    .about-card-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+    .about-big-icon {
+      width: 100px; height: 100px;
+      color: var(--cyan);
+      filter: drop-shadow(0 0 20px rgba(0,229,255,0.4));
+    }
+    .about-card-title {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-align: center;
+      color: var(--white);
+    }
+    .about-card-sub {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.7;
+    }
+    .about-decoration {
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,20,147,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .about-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .pill {
+      padding: 8px 18px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 13px;
+      color: var(--muted);
+      transition: all 0.3s;
+    }
+    .pill:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: var(--glow-c);
+    }
+
+    .about-features {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .about-feature {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .about-feature-icon {
+      width: 48px; height: 48px;
+      flex-shrink: 0;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+      transition: all 0.3s;
+    }
+    .about-feature:hover .about-feature-icon {
+      background: rgba(0,229,255,0.15);
+      box-shadow: var(--glow-c);
+    }
+    .about-feature-text h4 {
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .about-feature-text p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* =============================================
+       PRODUCTS
+    ============================================= */
+    #products {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent, rgba(0,229,255,0.03), transparent);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-header .label { padding-left: 0; padding-right: 0; }
+    .section-header .label::before { display: none; }
+    .section-header .label {
+      position: relative;
+      padding: 0 32px;
+    }
+    .section-header .label::before,
+    .section-header .label::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 24px; height: 1px;
+      background: var(--cyan);
+      box-shadow: var(--glow-c);
+    }
+    .section-header .label::before { left: 0; }
+    .section-header .label::after { right: 0; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      cursor: default;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent);
-      box-shadow: var(--cyan-glow);
-      border: none;
-      margin: 0;
+      background: linear-gradient(90deg, transparent, var(--magenta), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .product-card:hover {
+      border-color: rgba(0,229,255,0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow-soft);
+    }
+    .product-card:hover::before { opacity: 1; }
+
+    .product-icon-wrap {
+      width: 72px; height: 72px;
+      background: rgba(0,229,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: all 0.3s;
+      color: var(--cyan);
+    }
+    .product-card:hover .product-icon-wrap {
+      background: rgba(0,229,255,0.12);
+      border-color: var(--cyan);
+      box-shadow: var(--glow-c);
+      color: var(--cyan);
+    }
+    .product-icon-wrap svg { width: 36px; height: 36px; }
+
+    .product-name {
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .product-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
     }
 
-    /* ===== SCROLL REVEAL ===== */
+    /* =============================================
+       WHY CHOOSE US / STATS
+    ============================================= */
+    #why {
+      position: relative;
+      z-index: 1;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .stat-card:hover {
+      border-color: var(--cyan);
+      box-shadow: var(--glow-soft);
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    }
+    .stat-icon {
+      width: 40px; height: 40px;
+      color: var(--cyan);
+      margin: 0 auto 12px;
+    }
+    .stat-number {
+      font-family: var(--font-head);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--cyan);
+      text-shadow: 0 0 20px rgba(0,229,255,0.4);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
+    .why-reasons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .why-reason {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: all 0.3s;
+    }
+    .why-reason:hover {
+      border-color: rgba(255,20,147,0.3);
+      box-shadow: 0 0 30px rgba(255,20,147,0.08);
+    }
+    .why-reason-icon {
+      width: 44px; height: 44px;
+      flex-shrink: 0;
+      color: var(--magenta);
+      filter: drop-shadow(0 0 6px rgba(255,20,147,0.4));
+    }
+    .why-reason-content h4 {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+      letter-spacing: 0.3px;
+    }
+    .why-reason-content p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* =============================================
+       TESTIMONIALS
+    ============================================= */
+    #testimonials {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent, rgba(255,20,147,0.03), transparent);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--card);
+      border: 1px solid var(--border-mg);
+      border-radius: 16px;
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .testimonial-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--magenta), transparent);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 40px rgba(255,20,147,0.08);
+    }
+    .testimonial-quote-icon {
+      width: 32px; height: 32px;
+      color: rgba(255,20,147,0.3);
+      margin-bottom: 20px;
+    }
+    .testimonial-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    .star-svg {
+      width: 16px; height: 16px;
+      color: #FFD700;
+      filter: drop-shadow(0 0 4px rgba(255,215,0,0.6));
+    }
+    .testimonial-text {
+      font-size: 15px;
+      color: rgba(240,240,240,0.8);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .author-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0,229,255,0.3), rgba(255,20,147,0.3));
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .author-avatar svg { width: 20px; height: 20px; color: var(--white); }
+    .author-name {
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.3px;
+    }
+    .author-tag { font-size: 12px; color: var(--muted); }
+
+    /* =============================================
+       FAQ
+    ============================================= */
+    #faq {
+      position: relative;
+      z-index: 1;
+    }
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0;
+      gap: 20px;
+    }
+    .faq-question-text {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      text-align: left;
+      letter-spacing: 0.3px;
+      transition: color 0.3s;
+    }
+    .faq-question:hover .faq-question-text,
+    .faq-item.open .faq-question-text { color: var(--cyan); }
+
+    .faq-icon {
+      width: 28px; height: 28px;
+      flex-shrink: 0;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+      transition: all 0.3s;
+    }
+    .faq-item.open .faq-icon {
+      background: var(--cyan);
+      color: var(--bg);
+      box-shadow: var(--glow-c);
+    }
+    .faq-icon svg {
+      width: 14px; height: 14px;
+      transition: transform 0.3s;
+    }
+    .faq-item.open .faq-icon svg { transform: rotate(45deg); }
+
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; }
+    .faq-answer p {
+      padding-bottom: 24px;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* =============================================
+       CONTACT
+    ============================================= */
+    #contact {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, transparent, rgba(0,229,255,0.03), transparent);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .contact-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .contact-item-icon {
+      width: 48px; height: 48px;
+      flex-shrink: 0;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+    }
+    .contact-item-icon svg { width: 22px; height: 22px; }
+    .contact-item-body h4 {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .contact-item-body p, .contact-item-body a {
+      font-size: 16px;
+      color: var(--white);
+      text-decoration: none;
+      line-height: 1.6;
+      transition: color 0.3s;
+    }
+    .contact-item-body a:hover { color: var(--cyan); }
+
+    .hours-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+    }
+    .hours-list .day { color: var(--muted); }
+    .hours-list .time { color: var(--white); font-weight: 500; }
+
+    /* Form */
+    .contact-form {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-form::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    }
+    .form-title {
+      font-family: var(--font-head);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label {
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-input, .form-textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(136,136,170,0.5); }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
+    }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    #footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .footer-logo-text {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 1px;
+    }
+    .footer-logo-text span { color: var(--cyan); }
+    .footer-copy {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .footer-credit {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .footer-credit a {
+      color: var(--magenta);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .footer-credit a:hover { color: var(--white); }
+
+    /* =============================================
+       SCROLL ANIMATIONS
+    ============================================= */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -125,18 +1208,17 @@
     }
     .reveal-left {
       opacity: 0;
-      transform: translateX(-50px);
+      transform: translateX(-40px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .reveal-left.visible { opacity: 1; transform: translateX(0); }
     .reveal-right {
       opacity: 0;
-      transform: translateX(50px);
+      transform: translateX(40px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
-    /* delay helpers */
     .delay-1 { transition-delay: 0.1s; }
     .delay-2 { transition-delay: 0.2s; }
     .delay-3 { transition-delay: 0.3s; }
@@ -146,1274 +1228,101 @@
     .delay-7 { transition-delay: 0.7s; }
     .delay-8 { transition-delay: 0.8s; }
 
-    /* ===== BUTTONS ===== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 36px;
-      border-radius: 3px;
-      font-family: var(--font-head);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
-
-    .btn-cyan {
-      background: var(--cyan);
-      color: var(--bg);
-      box-shadow: var(--cyan-glow);
-    }
-    .btn-cyan:hover {
-      background: transparent;
-      color: var(--cyan);
-      border-color: var(--cyan);
-      box-shadow: var(--cyan-glow), 0 0 60px #00E5FF44 inset;
-    }
-
-    .btn-magenta {
-      background: var(--magenta);
-      color: var(--white);
-      box-shadow: var(--mag-glow);
-    }
-    .btn-magenta:hover {
-      background: transparent;
-      color: var(--magenta);
-      border-color: var(--magenta);
-      box-shadow: var(--mag-glow), 0 0 60px #FF149344 inset;
-    }
-
-    .btn-outline-cyan {
-      background: transparent;
-      color: var(--cyan);
-      border-color: var(--cyan);
-    }
-    .btn-outline-cyan:hover {
-      background: var(--cyan);
-      color: var(--bg);
-      box-shadow: var(--cyan-glow);
-    }
-
-    /* ===== NAV ===== */
-    #navbar {
-      position: fixed;
-      top: 0;
+    /* =============================================
+       NEON DIVIDER
+    ============================================= */
+    .neon-divider {
       width: 100%;
-      z-index: 1000;
-      padding: 0 24px;
-      transition: background 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    #navbar.scrolled {
-      background: rgba(13, 11, 30, 0.95);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 1px 0 var(--border), 0 4px 30px rgba(0,229,255,0.08);
-    }
-
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-
-    .nav-logo {
-      font-family: var(--font-head);
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--white);
-      line-height: 1;
-    }
-    .nav-logo span { color: var(--cyan); }
-    .nav-logo em {
-      font-style: normal;
-      font-size: 0.65em;
-      letter-spacing: 0.3em;
-      color: var(--magenta);
-      display: block;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--font-head);
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color 0.3s, text-shadow 0.3s;
-    }
-    .nav-links a:hover {
-      color: var(--cyan);
-      text-shadow: var(--cyan-glow);
-    }
-
-    .nav-cta {
-      padding: 9px 22px;
-      font-size: 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 6px;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      width: 26px;
-      height: 2px;
-      background: var(--cyan);
-      border-radius: 2px;
-      transition: all 0.35s ease;
-      display: block;
-      box-shadow: var(--cyan-glow);
-    }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 72px;
-      left: 0;
-      width: 100%;
-      background: rgba(13, 11, 30, 0.98);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border);
-      border-bottom: 2px solid var(--cyan);
-      padding: 24px;
-      flex-direction: column;
-      gap: 6px;
-      z-index: 999;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: var(--font-head);
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 12px 8px;
-      border-bottom: 1px solid rgba(0,229,255,0.08);
-      transition: color 0.3s;
-    }
-    .mobile-menu a:hover { color: var(--cyan); }
-    .mobile-menu .btn { margin-top: 12px; justify-content: center; }
-
-    /* ===== HERO ===== */
-    #hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    /* Synthwave grid background */
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(13,11,30,0.3) 0%, rgba(13,11,30,0.7) 60%, rgba(13,11,30,1) 100%),
-        linear-gradient(to bottom, transparent 50%, rgba(0,229,255,0.06) 50%),
-        linear-gradient(to right, transparent 50%, rgba(255,20,147,0.04) 50%);
-      background-size: 100% 100%, 100% 40px, 40px 100%;
-      z-index: 0;
-    }
-
-    /* Grid perspective plane */
-    #hero .grid-plane {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 60%;
-      background-image:
-        linear-gradient(rgba(0,229,255,0.15) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,229,255,0.15) 1px, transparent 1px);
-      background-size: 60px 60px;
-      transform: perspective(500px) rotateX(55deg);
-      transform-origin: bottom center;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,1) 100%);
-      z-index: 0;
-    }
-
-    /* Glowing orbs */
-    #hero .orb {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    #hero .orb-1 {
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
-      top: -100px;
-      left: -150px;
-      animation: pulse-orb 6s ease-in-out infinite;
-    }
-    #hero .orb-2 {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(255,20,147,0.1) 0%, transparent 70%);
-      bottom: 50px;
-      right: -100px;
-      animation: pulse-orb 8s ease-in-out infinite reverse;
-    }
-    #hero .orb-3 {
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 70%);
-      top: 40%;
-      right: 25%;
-      animation: pulse-orb 5s ease-in-out infinite;
-    }
-
-    @keyframes pulse-orb {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.15); opacity: 0.7; }
-    }
-
-    /* Floating particles */
-    .hero-particles {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .hero-particles span {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      border-radius: 50%;
-      animation: float-particle linear infinite;
-    }
-    @keyframes float-particle {
-      0% { transform: translateY(100vh) scale(0); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-20px) scale(1); opacity: 0; }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      padding: 0 24px;
-      margin: 0 auto;
-      text-align: center;
-      padding-top: 100px;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      padding: 6px 20px;
-      border: 1px solid var(--cyan);
-      color: var(--cyan);
-      font-family: var(--font-head);
-      font-size: 0.75rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-      border-radius: 2px;
-      box-shadow: 0 0 12px rgba(0,229,255,0.3);
-      animation: badge-flicker 4s ease-in-out infinite;
-    }
-
-    @keyframes badge-flicker {
-      0%, 95%, 100% { opacity: 1; }
-      96% { opacity: 0.6; }
-      97% { opacity: 1; }
-      98% { opacity: 0.4; }
-      99% { opacity: 1; }
-    }
-
-    .hero-title {
-      font-family: var(--font-head);
-      font-size: clamp(3rem, 9vw, 7.5rem);
-      font-weight: 700;
-      line-height: 0.95;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .hero-title .line-1 { color: var(--white); display: block; }
-    .hero-title .line-2 {
-      color: var(--cyan);
-      display: block;
-      text-shadow: var(--cyan-glow);
-      animation: neon-flicker 7s ease-in-out infinite;
-    }
-    .hero-title .line-3 {
-      color: var(--magenta);
-      display: block;
-      font-size: 0.55em;
-      text-shadow: var(--mag-glow);
-    }
-
-    @keyframes neon-flicker {
-      0%, 89%, 91%, 93%, 100% { text-shadow: var(--cyan-glow); opacity: 1; }
-      90% { text-shadow: none; opacity: 0.8; }
-      92% { text-shadow: var(--cyan-glow); }
-    }
-
-    .hero-tagline {
-      font-family: var(--font-head);
-      font-size: clamp(1.2rem, 3vw, 2rem);
-      font-weight: 500;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin: 24px 0 40px;
-      opacity: 0.9;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 60px;
-    }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-scroll span {
-      font-family: var(--font-head);
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .scroll-arrow {
-      width: 24px;
-      height: 24px;
-      border-right: 2px solid var(--cyan);
-      border-bottom: 2px solid var(--cyan);
-      transform: rotate(45deg);
-      animation: scroll-bounce 2s ease-in-out infinite;
-      box-shadow: 2px 2px 6px rgba(0,229,255,0.4);
-    }
-
-    @keyframes scroll-bounce {
-      0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 0.6; }
-      50% { transform: rotate(45deg) translate(4px, 4px); opacity: 1; }
-    }
-
-    /* ===== TRUST BADGES ===== */
-    #trust {
-      padding: 30px 0;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-    }
-
-    .trust-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      padding: 24px 16px;
-      border-right: 1px solid var(--border);
-      text-align: center;
-      position: relative;
-      transition: background 0.3s;
-    }
-    .trust-item:last-child { border-right: none; }
-    .trust-item:hover { background: rgba(0,229,255,0.04); }
-
-    .trust-icon {
-      font-size: 2rem;
-      filter: drop-shadow(0 0 8px currentColor);
-      line-height: 1;
-    }
-    .trust-icon.cyan { color: var(--cyan); }
-    .trust-icon.mag { color: var(--magenta); }
-
-    .trust-label {
-      font-family: var(--font-head);
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--white);
-    }
-
-    .trust-sub {
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
-    /* ===== ABOUT ===== */
-    #about { background: var(--bg); }
-
-    .about-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .about-visual {
-      position: relative;
-    }
-
-    .about-box {
-      aspect-ratio: 1;
-      max-width: 480px;
-      border: 1px solid var(--border);
-      background: var(--bg3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-box::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(0,229,255,0.12) 0%, transparent 60%),
-        radial-gradient(circle at 70% 70%, rgba(255,20,147,0.1) 0%, transparent 60%);
-    }
-
-    /* Neon corner accents */
-    .about-box::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to right, var(--cyan), var(--cyan)) top left / 40px 2px,
-        linear-gradient(to bottom, var(--cyan), var(--cyan)) top left / 2px 40px,
-        linear-gradient(to left, var(--magenta), var(--magenta)) bottom right / 40px 2px,
-        linear-gradient(to top, var(--magenta), var(--magenta)) bottom right / 2px 40px;
-      background-repeat: no-repeat;
-      box-shadow: var(--cyan-glow);
-    }
-
-    .about-box-inner {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      padding: 40px;
-    }
-
-    .about-icon-big {
-      font-size: 5rem;
-      line-height: 1;
-      filter: drop-shadow(0 0 20px rgba(0,229,255,0.6));
-      animation: icon-pulse 3s ease-in-out infinite;
-    }
-
-    @keyframes icon-pulse {
-      0%, 100% { filter: drop-shadow(0 0 20px rgba(0,229,255,0.6)); }
-      50% { filter: drop-shadow(0 0 40px rgba(0,229,255,0.9)) drop-shadow(0 0 60px rgba(255,20,147,0.4)); }
-    }
-
-    .about-box-text {
-      font-family: var(--font-head);
-      font-size: 1.6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--cyan);
-      text-shadow: var(--cyan-glow);
-      text-align: center;
-    }
-
-    .about-stat-row {
-      display: flex;
-      gap: 24px;
-      margin-top: 32px;
-    }
-
-    .about-stat {
-      flex: 1;
-      border: 1px solid var(--border);
-      padding: 20px;
-      text-align: center;
-      background: rgba(0,229,255,0.04);
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .about-stat:hover {
-      border-color: var(--cyan);
-      background: rgba(0,229,255,0.08);
-    }
-
-    .about-stat-num {
-      font-family: var(--font-head);
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--cyan);
-      text-shadow: var(--cyan-glow);
-      display: block;
-    }
-
-    .about-stat-label {
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .about-text .section-title { margin-bottom: 24px; }
-
-    .about-text p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 16px;
-      line-height: 1.8;
-    }
-
-    .about-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 28px;
-    }
-
-    .pill {
-      padding: 8px 20px;
-      border: 1px solid var(--border);
-      font-family: var(--font-head);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-    .pill:hover {
-      background: var(--cyan);
-      color: var(--bg);
-      box-shadow: var(--cyan-glow);
-    }
-
-    .pill.mag {
-      border-color: rgba(255,20,147,0.3);
-      color: var(--magenta);
-    }
-    .pill.mag:hover {
-      background: var(--magenta);
-      color: var(--white);
-      box-shadow: var(--mag-glow);
-    }
-
-    /* ===== PRODUCTS ===== */
-    #products { background: var(--bg2); }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-top: 60px;
-    }
-
-    .product-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 36px 24px 28px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      cursor: default;
-      transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
-      border-radius: 2px;
-    }
-
-    .product-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--cyan), var(--magenta));
-      transform: scaleX(0);
-      transition: transform 0.4s ease;
-    }
-    .product-card:hover::before { transform: scaleX(1); }
-
-    .product-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(0,229,255,0.06) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .product-card:hover::after { opacity: 1; }
-
-    .product-card:hover {
-      border-color: rgba(0,229,255,0.4);
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,229,255,0.08), 0 0 0 1px rgba(0,229,255,0.2);
-    }
-
-    .product-icon {
-      font-size: 2.8rem;
-      margin-bottom: 16px;
-      line-height: 1;
-      position: relative;
-      z-index: 1;
-      transition: filter 0.4s;
-    }
-    .product-card:hover .product-icon {
-      filter: drop-shadow(0 0 12px rgba(0,229,255,0.8));
-    }
-
-    .product-name {
-      font-family: var(--font-head);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .product-desc {
-      font-size: 0.78rem;
-      color: var(--muted);
-      line-height: 1.6;
-      position: relative;
-      z-index: 1;
-    }
-
-    .product-tag {
-      margin-top: 16px;
-      display: inline-block;
-      padding: 4px 14px;
-      border: 1px solid rgba(0,229,255,0.25);
-      color: var(--cyan);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-family: var(--font-head);
-      border-radius: 2px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .product-card.featured .product-tag {
-      border-color: rgba(255,20,147,0.4);
-      color: var(--magenta);
-    }
-
-    /* ===== WHY CHOOSE US ===== */
-    #why { background: var(--bg); overflow: hidden; position: relative; }
-
-    #why::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(255,20,147,0.05) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 1px solid var(--border);
-      margin: 60px 0;
-      background: var(--bg2);
-    }
-
-    .stat-item {
-      padding: 40px 30px;
-      text-align: center;
-      border-right: 1px solid var(--border);
-      position: relative;
-      transition: background 0.3s;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-item:hover { background: rgba(0,229,255,0.04); }
-
-    .stat-num {
-      font-family: var(--font-head);
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 700;
-      line-height: 1;
-      color: var(--cyan);
-      text-shadow: var(--cyan-glow);
-      margin-bottom: 8px;
-    }
-    .stat-num.mag-text {
-      color: var(--magenta);
-      text-shadow: var(--mag-glow);
-    }
-
-    .stat-label {
-      font-family: var(--font-head);
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .why-card {
-      border: 1px solid var(--border);
-      padding: 36px 28px;
-      background: var(--bg2);
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .why-card:hover {
-      border-color: rgba(0,229,255,0.35);
-      transform: translateY(-4px);
-    }
-
-    .why-num {
-      font-family: var(--font-head);
-      font-size: 4rem;
-      font-weight: 700;
-      color: rgba(0,229,255,0.08);
-      line-height: 1;
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      letter-spacing: -0.04em;
-      transition: color 0.3s;
-    }
-    .why-card:hover .why-num { color: rgba(0,229,255,0.15); }
-
-    .why-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
-
-    .why-title {
-      font-family: var(--font-head);
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 12px;
-    }
-
-    .why-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    /* ===== TESTIMONIALS ===== */
-    #testimonials { background: var(--bg2); }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 60px;
-    }
-
-    .testimonial-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      padding: 36px 28px;
-      position: relative;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    .testimonial-card:hover {
-      border-color: rgba(0,229,255,0.3);
-      box-shadow: 0 0 30px rgba(0,229,255,0.06);
-    }
-
-    .quote-mark {
-      font-family: var(--font-head);
-      font-size: 5rem;
-      line-height: 0.6;
-      color: var(--cyan);
-      opacity: 0.2;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .stars {
-      color: var(--cyan);
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      margin-bottom: 16px;
-      text-shadow: var(--cyan-glow);
-    }
-
-    .testimonial-text {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.8;
-      font-style: italic;
-      margin-bottom: 24px;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .author-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--cyan), var(--magenta));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--bg);
-      flex-shrink: 0;
-    }
-
-    .author-name {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--white);
-    }
-    .author-since {
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-    }
-
-    /* ===== FAQ ===== */
-    #faq { background: var(--bg); }
-
-    .faq-list {
-      max-width: 800px;
-      margin: 60px auto 0;
-    }
-
-    .faq-item {
-      border: 1px solid var(--border);
-      margin-bottom: 8px;
-      overflow: hidden;
-      transition: border-color 0.3s;
-    }
-    .faq-item.open {
-      border-color: rgba(0,229,255,0.35);
-    }
-
-    .faq-question {
-      width: 100%;
-      padding: 22px 28px;
-      background: var(--bg2);
-      border: none;
-      color: var(--white);
-      font-family: var(--font-head);
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      transition: background 0.3s, color 0.3s;
-    }
-    .faq-question:hover, .faq-item.open .faq-question {
-      color: var(--cyan);
-      background: rgba(0,229,255,0.05);
-    }
-
-    .faq-icon {
-      width: 24px;
-      height: 24px;
-      border: 1px solid var(--cyan);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1rem;
-      color: var(--cyan);
-      transition: transform 0.3s, background 0.3s;
-    }
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-      background: var(--cyan);
-      color: var(--bg);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.4s ease;
-      background: var(--bg3);
-    }
-    .faq-item.open .faq-answer { max-height: 300px; }
-
-    .faq-answer-inner {
-      padding: 20px 28px 28px;
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    /* ===== CONTACT ===== */
-    #contact { background: var(--bg2); }
-
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 60px;
-      margin-top: 60px;
-      align-items: start;
-    }
-
-    .contact-info h3 {
-      font-family: var(--font-head);
-      font-size: 1.6rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--white);
-      margin-bottom: 32px;
-    }
-
-    .contact-block {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-      margin-bottom: 28px;
-      padding: 20px;
-      border: 1px solid var(--border);
-      background: var(--bg3);
-      transition: border-color 0.3s;
-    }
-    .contact-block:hover { border-color: rgba(0,229,255,0.3); }
-
-    .contact-block-icon {
-      font-size: 1.6rem;
-      line-height: 1;
-      flex-shrink: 0;
-      filter: drop-shadow(0 0 8px rgba(0,229,255,0.5));
-    }
-
-    .contact-block-text {}
-    .contact-block-title {
-      font-family: var(--font-head);
-      font-size: 0.75rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 6px;
-    }
-    .contact-block-value {
-      color: var(--white);
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-    .contact-block-value a { color: var(--white); transition: color 0.3s; }
-    .contact-block-value a:hover { color: var(--cyan); }
-
-    .hours-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px 16px;
-      margin-top: 4px;
-    }
-    .hours-row {
-      display: contents;
-    }
-    .hours-day { color: var(--muted); font-size: 0.85rem; }
-    .hours-time { color: var(--white); font-size: 0.85rem; font-weight: 500; }
-
-    /* Contact form */
-    .contact-form {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      padding: 40px;
-    }
-
-    .form-title {
-      font-family: var(--font-head);
-      font-size: 1.4rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 28px;
-      color: var(--white);
-    }
-    .form-title span { color: var(--cyan); }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      font-family: var(--font-head);
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      padding: 14px 18px;
-      outline: none;
-      transition: border-color 0.3s, box-shadow 0.3s;
-      border-radius: 2px;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 0 3px rgba(0,229,255,0.1);
-    }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .form-group select { appearance: none; cursor: pointer; }
-    .form-group select option { background: var(--bg2); }
-
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      padding: 50px 0 30px;
-      text-align: center;
-    }
-
-    .footer-logo {
-      font-family: var(--font-head);
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 8px;
-    }
-    .footer-logo span { color: var(--cyan); text-shadow: var(--cyan-glow); }
-
-    .footer-tagline {
-      color: var(--muted);
-      font-size: 0.8rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: 32px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
-      list-style: none;
-    }
-    .footer-links a {
-      font-family: var(--font-head);
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color 0.3s;
-    }
-    .footer-links a:hover { color: var(--cyan); }
-
-    .footer-divider {
       height: 1px;
-      background: var(--border);
-      margin: 24px 0;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), var(--cyan), transparent);
+      opacity: 0.3;
+      margin: 0;
     }
 
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .footer-copy {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .footer-credit {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-    .footer-credit a { color: var(--cyan); }
-    .footer-credit a:hover { text-shadow: var(--cyan-glow); }
-
-    .footer-age {
-      font-family: var(--font-head);
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--magenta);
-      text-shadow: var(--mag-glow);
-      padding: 6px 16px;
-      border: 1px solid rgba(255,20,147,0.35);
-      border-radius: 2px;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 1024px) {
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-      .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(3) { border-top: 1px solid var(--border); }
-      .stat-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-layout { grid-template-columns: 1fr; gap: 40px; }
-      .about-visual { display: none; }
-    }
-
-    @media (max-width: 768px) {
-      .section-pad { padding: 70px 0; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .hero-actions { flex-direction: column; align-items: center; }
-      .trust-grid { grid-template-columns: repeat(2, 1fr); }
-      .trust-item:nth-child(2) { border-right: none; }
-      .trust-item:nth-child(3) { border-top: 1px solid var(--border); }
-      .trust-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .why-grid { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
-      .contact-layout { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .contact-form { padding: 28px 20px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 480px) {
-      .products-grid { grid-template-columns: 1fr; }
-      .trust-grid { grid-template-columns: 1fr; }
-      .trust-item { border-right: none !important; border-bottom: 1px solid var(--border); }
-      .trust-item:last-child { border-bottom: none; }
-      .about-stat-row { flex-direction: column; }
-      .stats-bar { grid-template-columns: 1fr; }
-      .stat-item { border-right: none !important; border-bottom: 1px solid var(--border); }
-      .stat-item:last-child { border-bottom: none; }
-    }
-
-    /* ===== FORM SUBMIT STATE ===== */
-    .form-success {
-      display: none;
+    /* =============================================
+       AGE GATE (subtle inline bar)
+    ============================================= */
+    .age-bar {
+      background: rgba(255,20,147,0.08);
+      border-bottom: 1px solid rgba(255,20,147,0.2);
+      padding: 10px 24px;
       text-align: center;
-      padding: 40px 20px;
-    }
-    .form-success.show { display: block; }
-    .form-success-icon { font-size: 4rem; margin-bottom: 16px; }
-    .form-success-title {
       font-family: var(--font-head);
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--cyan);
-      text-shadow: var(--cyan-glow);
-      margin-bottom: 12px;
+      color: rgba(255,20,147,0.8);
     }
-    .form-success-text { font-size: 0.9rem; color: var(--muted); }
 
-    /* map link */
-    .map-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 12px;
-      font-size: 0.8rem;
-      color: var(--cyan);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-family: var(--font-head);
-      transition: text-shadow 0.3s;
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1100px) {
+      .products-grid { grid-template-columns: repeat(4, 1fr); }
     }
-    .map-link:hover { text-shadow: var(--cyan-glow); }
+    @media (max-width: 960px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .why-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta .btn { display: none; }
+      .hamburger { display: flex; }
+      .nav-cta .btn-call-sm { display: inline-flex !important; }
+      .form-row { grid-template-columns: 1fr; }
+      .trust-inner { gap: 32px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      :root { --nav-h: 64px; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .trust-inner { gap: 20px; }
+      .trust-badge { flex-direction: column; text-align: center; gap: 8px; }
+    }
+
+    .btn-call-sm { display: none !important; }
   </style>
 </head>
 
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav id="navbar">
-    <div class="nav-inner">
-      <div class="nav-logo">
-        <span>Galaxy</span> Smoke Shop
-        <em>Colorado Springs</em>
-      </div>
+  <!-- Animated background grid -->
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <!-- Floating particles (JS generated) -->
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <!-- Age gate bar -->
+  <div class="age-bar">Must be 21 or older to enter this establishment</div>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="container nav-inner">
+
+      <a href="#hero" class="nav-logo" aria-label="Galaxy Smoke Shop Home">
+        <!-- Logo star/galaxy SVG icon -->
+        <svg class="nav-logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="19" cy="19" r="18" stroke="#00E5FF" stroke-width="1.2" opacity="0.4"/>
+          <circle cx="19" cy="19" r="12" stroke="#FF1493" stroke-width="0.8" opacity="0.5"/>
+          <!-- Galaxy spiral arms -->
+          <path d="M19 8 C22 10 26 15 24 19 C22 23 16 25 12 22" stroke="#00E5FF" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+          <path d="M19 30 C16 28 12 23 14 19 C16 15 22 13 26 16" stroke="#FF1493" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.8"/>
+          <circle cx="19" cy="19" r="3" fill="#00E5FF" opacity="0.9"/>
+          <circle cx="19" cy="19" r="1.5" fill="#ffffff"/>
+          <!-- Stars -->
+          <circle cx="10" cy="10" r="1" fill="#00E5FF" opacity="0.6"/>
+          <circle cx="28" cy="12" r="0.8" fill="#FF1493" opacity="0.6"/>
+          <circle cx="8" cy="27" r="0.6" fill="#00E5FF" opacity="0.5"/>
+          <circle cx="30" cy="28" r="1" fill="#FF1493" opacity="0.5"/>
+        </svg>
+        <span class="nav-logo-text">GALAXY <span>SMOKE</span></span>
+      </a>
 
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
@@ -1422,758 +1331,966 @@
         <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="tel:+17192557222" class="btn btn-cyan nav-cta">📞 Call Now</a></li>
       </ul>
 
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-cta">
+        <a href="tel:+17195551234" class="btn btn-primary btn-call-sm" style="padding:10px 20px;font-size:12px;">Call Us</a>
+        <a href="tel:+17195551234" class="btn btn-primary" style="padding:10px 24px;font-size:13px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 10.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.31 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+          Call Now
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
     </div>
   </nav>
 
   <!-- Mobile menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#about" onclick="closeMobile()">About</a>
-    <a href="#products" onclick="closeMobile()">Products</a>
-    <a href="#why" onclick="closeMobile()">Why Us</a>
-    <a href="#testimonials" onclick="closeMobile()">Reviews</a>
-    <a href="#faq" onclick="closeMobile()">FAQ</a>
-    <a href="#contact" onclick="closeMobile()">Contact</a>
-    <a href="tel:+17192557222" class="btn btn-cyan">📞 Call Now</a>
+  <ul class="mobile-menu" id="mobileMenu" role="list">
+    <li><a href="#about" class="mobile-link">About</a></li>
+    <li><a href="#products" class="mobile-link">Products</a></li>
+    <li><a href="#why" class="mobile-link">Why Us</a></li>
+    <li><a href="#testimonials" class="mobile-link">Reviews</a></li>
+    <li><a href="#faq" class="mobile-link">FAQ</a></li>
+    <li><a href="#contact" class="mobile-link">Contact</a></li>
+    <li><a href="tel:+17195551234" class="mobile-link" style="color:var(--magenta)">Call Now</a></li>
+  </ul>
+
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-scanlines" aria-hidden="true"></div>
+    <div class="hero-orb" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-content">
+
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Colorado Springs, CO — Est. Locally Owned
+        </div>
+
+        <h1 class="hero-title">
+          <span class="line1">GALAXY</span>
+          <span class="line2">SMOKE SHOP</span>
+        </h1>
+
+        <p class="hero-tagline">Elevate Your Experience</p>
+
+        <p class="hero-desc">
+          Your premier destination for premium glass, vaporizers, CBD, kratom, and everything in between. Curated with care. Stocked for you.
+        </p>
+
+        <div class="hero-actions">
+          <a href="tel:+17195551234" class="btn btn-call">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 10.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.31 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+            Call Now
+          </a>
+          <a href="#products" class="btn btn-outline">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            Explore Products
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span class="hero-scroll-text">Scroll</span>
+      <span class="hero-scroll-line"></span>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TRUST BADGES
+  ============================================================ -->
+  <div id="trust" class="reveal">
+    <div class="container">
+      <div class="trust-inner">
+
+        <!-- Locally Owned -->
+        <div class="trust-badge">
+          <svg class="trust-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20 4 L24 14 L35 14 L26 21 L29 32 L20 26 L11 32 L14 21 L5 14 L16 14 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            <circle cx="20" cy="20" r="5" fill="currentColor" opacity="0.2"/>
+          </svg>
+          <div>
+            <div class="trust-label">Locally Owned</div>
+            <div class="trust-sublabel">Colorado Springs Proud</div>
+          </div>
+        </div>
+
+        <!-- Top Brands -->
+        <div class="trust-badge">
+          <svg class="trust-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="5" y="8" width="30" height="20" rx="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M5 15 L35 15" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="22" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M18 22 L28 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M18 26 L24 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M12 28 L12 34 M20 28 L20 34 M28 28 L28 34" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <div>
+            <div class="trust-label">Top Brands</div>
+            <div class="trust-sublabel">Hand-Curated Selection</div>
+          </div>
+        </div>
+
+        <!-- Best Prices -->
+        <div class="trust-badge">
+          <svg class="trust-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="15" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M20 10 L20 12 M20 28 L20 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M15 14.5 C15 12.5 18 11 20 12.5 C23 14 23 16.5 20 17.5 C17 18.5 15 21 18 23.5 C20 25 24 24.5 24 22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          </svg>
+          <div>
+            <div class="trust-label">Best Prices</div>
+            <div class="trust-sublabel">No Price Gouging</div>
+          </div>
+        </div>
+
+        <!-- 21+ -->
+        <div class="trust-badge">
+          <svg class="trust-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20 5 L34 12 L34 28 C34 34 20 38 20 38 C20 38 6 34 6 28 L6 12 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            <text x="10" y="26" font-family="Rajdhani, sans-serif" font-size="12" font-weight="700" fill="currentColor">21+</text>
+          </svg>
+          <div>
+            <div class="trust-label">21+ Only</div>
+            <div class="trust-sublabel">ID Required</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
-  <!-- ===== HERO ===== -->
-  <section id="hero">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="grid-plane"></div>
-    <div class="hero-particles" id="heroParticles"></div>
+  <div class="neon-divider"></div>
 
-    <div class="hero-content">
-      <div class="hero-badge reveal" style="transition-delay:0.1s">⚡ Colorado Springs' Premier Smoke Shop ⚡</div>
 
-      <h1 class="hero-title reveal" style="transition-delay:0.25s">
-        <span class="line-1">Galaxy</span>
-        <span class="line-2">Smoke Shop</span>
-        <span class="line-3">Est. Colorado Springs</span>
-      </h1>
-
-      <p class="hero-tagline reveal" style="transition-delay:0.4s">
-        — Elevate Your Experience —
-      </p>
-
-      <div class="hero-actions reveal" style="transition-delay:0.55s">
-        <a href="tel:+17192557222" class="btn btn-cyan">
-          <span>📞</span> Call (719) 255-7222
-        </a>
-        <a href="#products" class="btn btn-outline-cyan">
-          Explore Products
-        </a>
-        <a href="https://maps.google.com/?q=3960+Maizeland+Rd+Colorado+Springs+CO+80909" target="_blank" class="btn btn-magenta">
-          <span>📍</span> Get Directions
-        </a>
-      </div>
-
-      <div class="reveal" style="transition-delay:0.7s">
-        <p style="font-family:var(--font-head);letter-spacing:0.15em;text-transform:uppercase;font-size:0.75rem;color:var(--muted);">
-          3960 Maizeland Rd &nbsp;·&nbsp; Colorado Springs, CO 80909 &nbsp;·&nbsp; Mon–Sat 9AM–9PM
-        </p>
-      </div>
-    </div>
-
-    <div class="hero-scroll">
-      <span>Scroll</span>
-      <div class="scroll-arrow"></div>
-    </div>
-  </section>
-
-  <!-- ===== TRUST BADGES ===== -->
-  <section id="trust">
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section id="about" class="section">
     <div class="container">
-      <div class="trust-grid">
-        <div class="trust-item reveal delay-1">
-          <div class="trust-icon cyan">🏪</div>
-          <div class="trust-label">Locally Owned</div>
-          <div class="trust-sub">Colorado Springs Proud</div>
-        </div>
-        <div class="trust-item reveal delay-2">
-          <div class="trust-icon mag">⭐</div>
-          <div class="trust-label">Top Brands</div>
-          <div class="trust-sub">Premium Selection Only</div>
-        </div>
-        <div class="trust-item reveal delay-3">
-          <div class="trust-icon cyan">💲</div>
-          <div class="trust-label">Best Prices</div>
-          <div class="trust-sub">Competitive Guarantee</div>
-        </div>
-        <div class="trust-item reveal delay-4">
-          <div class="trust-icon mag">🔞</div>
-          <div class="trust-label">21+ Only</div>
-          <div class="trust-sub">Valid ID Required</div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <div class="about-grid">
 
-  <hr class="neon-line" />
-
-  <!-- ===== ABOUT ===== -->
-  <section id="about" class="section-pad">
-    <div class="container">
-      <div class="about-layout">
-        <div class="about-visual reveal-left">
-          <div class="about-box">
-            <div class="about-box-inner">
-              <div class="about-icon-big">🌌</div>
-              <div class="about-box-text">Galaxy<br/>Smoke Shop</div>
-              <div style="width:60px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta));"></div>
-              <div style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-align:center;">
-                Colorado Springs<br/>Premier Smoke Shop
+        <div class="reveal-left">
+          <div class="about-card">
+            <div class="about-decoration"></div>
+            <div class="about-card-inner">
+              <!-- Galaxy/smoke shop SVG illustration -->
+              <svg class="about-big-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Outer ring -->
+                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="0.8" opacity="0.2" stroke-dasharray="4 3"/>
+                <circle cx="50" cy="50" r="35" stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
+                <!-- Galaxy spiral -->
+                <path d="M50 20 C58 25 68 38 62 50 C56 62 38 66 30 58" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.9"/>
+                <path d="M50 80 C42 75 32 62 38 50 C44 38 62 34 70 42" stroke="#FF1493" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+                <!-- Core -->
+                <circle cx="50" cy="50" r="8" fill="currentColor" opacity="0.15"/>
+                <circle cx="50" cy="50" r="5" fill="currentColor" opacity="0.6"/>
+                <circle cx="50" cy="50" r="2.5" fill="white"/>
+                <!-- Stars -->
+                <circle cx="22" cy="22" r="1.5" fill="currentColor" opacity="0.7"/>
+                <circle cx="78" cy="25" r="1" fill="#FF1493" opacity="0.8"/>
+                <circle cx="18" cy="65" r="1.2" fill="currentColor" opacity="0.6"/>
+                <circle cx="82" cy="70" r="1.5" fill="#FF1493" opacity="0.6"/>
+                <circle cx="60" cy="82" r="1" fill="currentColor" opacity="0.7"/>
+                <circle cx="30" cy="35" r="0.8" fill="white" opacity="0.5"/>
+                <circle cx="72" cy="45" r="0.8" fill="white" opacity="0.5"/>
+                <circle cx="42" cy="72" r="0.8" fill="white" opacity="0.4"/>
+              </svg>
+              <div class="about-card-title">Locally Rooted,<br/>Galactically Stocked</div>
+              <p class="about-card-sub">Serving Colorado Springs with pride — not a franchise, not a chain. A real smoke shop built by real people who actually know what you need.</p>
+              <div class="about-pills">
+                <span class="pill">Glass Connoisseurs</span>
+                <span class="pill">Expert Staff</span>
+                <span class="pill">Community First</span>
               </div>
             </div>
           </div>
-          <div class="about-stat-row">
-            <div class="about-stat">
-              <span class="about-stat-num">500+</span>
-              <span class="about-stat-label">Products In Stock</span>
-            </div>
-            <div class="about-stat">
-              <span class="about-stat-num" style="color:var(--magenta);text-shadow:var(--mag-glow);">4.8★</span>
-              <span class="about-stat-label">Average Rating</span>
-            </div>
-          </div>
         </div>
 
-        <div class="about-text">
-          <span class="section-label reveal">About Galaxy Smoke Shop</span>
-          <h2 class="section-title reveal delay-1">
-            Your Local<br/>
-            <span>Galaxy</span> of<br/>
-            <span class="mag">Choices</span>
+        <div class="reveal-right">
+          <div class="label">Our Story</div>
+          <h2 class="heading heading-lg" style="margin-bottom:20px;">
+            More Than a <span class="neon-text-c">Smoke Shop</span>
           </h2>
-
-          <p class="reveal delay-2">
-            Galaxy Smoke Shop is Colorado Springs' go-to destination for premium smoking accessories, CBD products, and everything in between. As a proudly locally owned and operated shop, we pour our passion into every product we carry.
-          </p>
-          <p class="reveal delay-3">
-            Our team of knowledgeable staff is always ready to guide you to the perfect product — whether you're a first-timer exploring options or a seasoned enthusiast searching for something specific. We believe in quality, value, and a welcoming atmosphere for all our customers.
-          </p>
-          <p class="reveal delay-4">
-            Walk through our doors at 3960 Maizeland Rd and discover a carefully curated collection of the finest glass, vaporizers, papers, CBD, kratom, and more — all under one roof, at prices that won't launch your budget into orbit.
+          <p style="color:var(--muted);font-size:15px;line-height:1.85;margin-bottom:36px;">
+            Galaxy Smoke Shop was built on a simple idea: you deserve a smoke shop with real knowledge, genuine passion, and a selection that doesn't disappoint. We're locally owned, community-driven, and stocked with the products you actually want — at prices that respect your wallet.
           </p>
 
-          <div class="about-pills reveal delay-5">
-            <span class="pill">Locally Owned</span>
-            <span class="pill mag">Expert Staff</span>
-            <span class="pill">Top Brands</span>
-            <span class="pill mag">500+ Products</span>
-            <span class="pill">Great Prices</span>
+          <div class="about-features">
+
+            <div class="about-feature">
+              <div class="about-feature-icon">
+                <!-- Home/local SVG -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <h4>Locally Owned &amp; Operated</h4>
+                <p>We're not a chain — we're your neighbors. Every decision gets made right here in Colorado Springs, for Colorado Springs.</p>
+              </div>
+            </div>
+
+            <div class="about-feature">
+              <div class="about-feature-icon">
+                <!-- Curated selection — grid/sparkle -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <h4>Curated Selection</h4>
+                <p>We don't stock junk. Every product on our shelves has been vetted for quality, value, and reliability — glass to CBD and beyond.</p>
+              </div>
+            </div>
+
+            <div class="about-feature">
+              <div class="about-feature-icon">
+                <!-- Staff/person SVG -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <div class="about-feature-text">
+                <h4>Friendly &amp; Knowledgeable Staff</h4>
+                <p>Have a question about vaporizers, glass, or CBD? Our team genuinely loves this stuff and will steer you right every time.</p>
+              </div>
+            </div>
+
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <hr class="neon-line" />
+  <div class="neon-divider"></div>
 
-  <!-- ===== PRODUCTS ===== -->
-  <section id="products" class="section-pad">
+
+  <!-- ============================================================
+       PRODUCTS
+  ============================================================ -->
+  <section id="products" class="section">
     <div class="container">
-      <div class="text-center">
-        <span class="section-label reveal">What We Carry</span>
-        <h2 class="section-title reveal delay-1">
-          Our <span>Products</span> &<br/>
-          <span class="mag">Services</span>
+
+      <div class="section-header reveal">
+        <div class="label">What We Carry</div>
+        <h2 class="heading heading-lg" style="margin-top:12px;">
+          Our <span class="neon-text-m">Products</span>
         </h2>
-        <p class="reveal delay-2" style="max-width:560px;margin:20px auto 0;color:var(--muted);font-size:0.9rem;">
-          Hand-selected products from the best brands in the industry. If we don't carry it, we can order it.
+        <p style="color:var(--muted);max-width:520px;margin:16px auto 0;font-size:15px;line-height:1.7;">
+          From hand-blown glass to cutting-edge vaporizers — we carry what enthusiasts actually want.
         </p>
       </div>
 
       <div class="products-grid">
+
+        <!-- 1. Premium Glass Pieces -->
         <div class="product-card reveal delay-1">
-          <div class="product-icon">🧪</div>
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <!-- Glass pipe shape -->
+              <ellipse cx="18" cy="8" rx="8" ry="5" stroke-width="1.8" fill="none"/>
+              <path d="M10 8 L8 28" stroke-width="1.8" fill="none"/>
+              <path d="M26 8 L28 28" stroke-width="1.8" fill="none"/>
+              <path d="M8 28 Q18 33 28 28" stroke-width="1.8" fill="none"/>
+              <!-- Inner detail -->
+              <ellipse cx="18" cy="8" rx="4" ry="2.5" stroke-width="1" opacity="0.5" fill="none"/>
+              <path d="M14 8 L15 22 M22 8 L21 22" stroke-width="1" opacity="0.4"/>
+            </svg>
+          </div>
           <div class="product-name">Premium Glass Pieces</div>
-          <div class="product-desc">Artisan and branded glass from the finest makers. Pipes, spoons, chillums, and more — in every style.</div>
-          <span class="product-tag">Shop Favorite</span>
+          <div class="product-desc">Hand-selected borosilicate and artistic glass from trusted glassblowers.</div>
         </div>
 
+        <!-- 2. Water Pipes & Bubblers -->
         <div class="product-card reveal delay-2">
-          <div class="product-icon">💧</div>
-          <div class="product-name">Water Pipes & Bubblers</div>
-          <div class="product-desc">Smooth hits every time. From compact bubblers to large statement water pipes with percolators.</div>
-          <span class="product-tag">Wide Selection</span>
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <!-- Bong/water pipe shape -->
+              <rect x="12" y="16" width="12" height="14" rx="3" stroke-width="1.8" fill="none"/>
+              <path d="M18 16 L18 8" stroke-width="1.8"/>
+              <path d="M14 8 L22 8" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- Water line -->
+              <path d="M12 24 Q18 22 24 24" stroke-width="1.2" opacity="0.5"/>
+              <!-- Downstem -->
+              <path d="M15 30 L11 22" stroke-width="1.5" opacity="0.7"/>
+              <circle cx="10" cy="21" r="2.5" stroke-width="1.5" fill="none" opacity="0.7"/>
+              <!-- Bubbles -->
+              <circle cx="16" cy="21" r="1" stroke-width="1" opacity="0.4"/>
+              <circle cx="20" cy="20" r="0.8" stroke-width="1" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="product-name">Water Pipes &amp; Bubblers</div>
+          <div class="product-desc">Smooth filtration from portable bubblers to full-size bongs.</div>
         </div>
 
-        <div class="product-card featured reveal delay-3">
-          <div class="product-icon">💨</div>
-          <div class="product-name">Vaporizers & Mods</div>
-          <div class="product-desc">The latest in vape tech — dry herb vaporizers, concentrate pens, box mods, and all the accessories.</div>
-          <span class="product-tag">New Arrivals</span>
-        </div>
-
-        <div class="product-card reveal delay-4">
-          <div class="product-icon">🌿</div>
-          <div class="product-name">Rolling Papers & Cones</div>
-          <div class="product-desc">RAW, OCB, Zig-Zag, Vibes and more. King size, 1¼, cones, hemp wraps — every roll you need.</div>
-          <span class="product-tag">All Brands</span>
-        </div>
-
-        <div class="product-card reveal delay-1">
-          <div class="product-icon">🌱</div>
-          <div class="product-name">CBD & Delta Products</div>
-          <div class="product-desc">Full-spectrum CBD, Delta-8, Delta-9, Delta-10, THC-P, HHC, and more from trusted, tested brands.</div>
-          <span class="product-tag">Lab Tested</span>
-        </div>
-
-        <div class="product-card reveal delay-2">
-          <div class="product-icon">🍃</div>
-          <div class="product-name">Kratom</div>
-          <div class="product-desc">Premium kratom powders, capsules, and extracts. Multiple strains and brands carefully sourced for quality.</div>
-          <span class="product-tag">Top Quality</span>
-        </div>
-
+        <!-- 3. Vaporizers & Mods -->
         <div class="product-card reveal delay-3">
-          <div class="product-icon">🕯️</div>
-          <div class="product-name">Incense & Accessories</div>
-          <div class="product-desc">Incense sticks, cones, burners, grinders, rolling trays, storage solutions, and lifestyle accessories.</div>
-          <span class="product-tag">Lifestyle</span>
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <!-- Vaporizer device -->
+              <rect x="12" y="10" width="12" height="20" rx="3" stroke-width="1.8" fill="none"/>
+              <rect x="14" y="12" width="8" height="6" rx="1.5" stroke-width="1.2" fill="none" opacity="0.6"/>
+              <circle cx="18" cy="24" r="2" stroke-width="1.5" fill="none"/>
+              <circle cx="18" cy="24" r="0.8" fill="currentColor"/>
+              <!-- Vapor wisps -->
+              <path d="M18 10 Q16 6 18 3" stroke-width="1.5" opacity="0.5"/>
+              <path d="M20 9 Q22 5 20 2" stroke-width="1.2" opacity="0.35"/>
+              <path d="M16 9 Q14 5 16 2" stroke-width="1.2" opacity="0.35"/>
+            </svg>
+          </div>
+          <div class="product-name">Vaporizers &amp; Mods</div>
+          <div class="product-desc">Desktop, portable, and pen-style vaporizers plus mod kits and accessories.</div>
         </div>
 
-        <div class="product-card featured reveal delay-4">
-          <div class="product-icon">🧹</div>
-          <div class="product-name">Detox Products</div>
-          <div class="product-desc">Detox drinks, cleansing kits, and related products from reputable brands. Discreetly packaged.</div>
-          <span class="product-tag">Discreet</span>
+        <!-- 4. Rolling Papers & Cones -->
+        <div class="product-card reveal delay-4">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <!-- Cone/joint shape -->
+              <path d="M10 30 L22 8 L26 30 Z" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+              <!-- Filter tip -->
+              <rect x="10" y="28" width="16" height="4" rx="1" stroke-width="1.2" fill="none"/>
+              <!-- Paper lines/seam -->
+              <path d="M12 28 L22.5 10" stroke-width="1" opacity="0.4"/>
+              <!-- Smoke -->
+              <path d="M22 8 Q20 4 22 1" stroke-width="1.5" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="product-name">Rolling Papers &amp; Cones</div>
+          <div class="product-desc">Raw, OCB, Zig-Zag, and premium pre-rolled cones in every size.</div>
         </div>
+
+        <!-- 5. CBD & Delta Products -->
+        <div class="product-card reveal delay-5">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <!-- Leaf / hemp leaf shape -->
+              <path d="M18 32 L18 16" stroke-width="1.8"/>
+              <path d="M18 16 C18 16 10 14 8 8 C14 7 18 12 18 16 Z" stroke-width="1.5" fill="none"/>
+              <path d="M18 16 C18 16 26 14 28 8 C22 7 18 12 18 16 Z" stroke-width="1.5" fill="none"/>
+              <path d="M18 20 C18 20 12 19 10 14" stroke-width="1.2" opacity="0.5" fill="none"/>
+              <path d="M18 20 C18 20 24 19 26 14" stroke-width="1.2" opacity="0.5" fill="none"/>
+              <path d="M18 24 C18 24 14 23 13 19" stroke-width="1" opacity="0.4" fill="none"/>
+              <path d="M18 24 C18 24 22 23 23 19" stroke-width="1" opacity="0.4" fill="none"/>
+            </svg>
+          </div>
+          <div class="product-name">CBD &amp; Delta Products</div>
+          <div class="product-desc">Full-spectrum CBD oils, tinctures, edibles, Delta-8, Delta-9, and HHC.</div>
+        </div>
+
+        <!-- 6. Kratom -->
+        <div class="product-card reveal delay-6">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <!-- Botanical leaf shape -->
+              <path d="M18 30 C18 30 6 26 7 14 C10 7 18 6 18 6 C18 6 26 7 29 14 C30 26 18 30 18 30 Z" stroke-width="1.8" fill="none"/>
+              <!-- Veins -->
+              <path d="M18 6 L18 30" stroke-width="1.2" opacity="0.5"/>
+              <path d="M18 12 L13 16" stroke-width="1" opacity="0.4"/>
+              <path d="M18 12 L23 16" stroke-width="1" opacity="0.4"/>
+              <path d="M18 18 L12 21" stroke-width="1" opacity="0.4"/>
+              <path d="M18 18 L24 21" stroke-width="1" opacity="0.4"/>
+              <path d="M18 23 L14 25" stroke-width="1" opacity="0.3"/>
+              <path d="M18 23 L22 25" stroke-width="1" opacity="0.3"/>
+            </svg>
+          </div>
+          <div class="product-name">Kratom</div>
+          <div class="product-desc">Lab-tested kratom capsules, powder, and extracts from reputable vendors.</div>
+        </div>
+
+        <!-- 7. Incense & Accessories -->
+        <div class="product-card reveal delay-7">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <!-- Incense stick -->
+              <path d="M18 30 L18 10" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- Smoke wisps -->
+              <path d="M18 10 Q14 6 17 2" stroke-width="1.5" fill="none" opacity="0.8"/>
+              <path d="M17 2 Q21 -1 18 -4" stroke-width="1.2" fill="none" opacity="0.5"/>
+              <!-- Holder/base -->
+              <rect x="12" y="28" width="12" height="4" rx="2" stroke-width="1.5" fill="none"/>
+              <!-- Glow dot at tip -->
+              <circle cx="18" cy="10" r="2" stroke-width="1.5" fill="none"/>
+              <circle cx="18" cy="10" r="0.8" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="product-name">Incense &amp; Accessories</div>
+          <div class="product-desc">Imported incense sticks, resin, lighters, grinders, trays, and more.</div>
+        </div>
+
+        <!-- 8. Detox Products -->
+        <div class="product-card reveal delay-8">
+          <div class="product-icon-wrap">
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <!-- Bottle/flask shape -->
+              <path d="M14 8 L14 6 L22 6 L22 8 C22 8 26 12 26 20 C26 26 22.6 30 18 30 C13.4 30 10 26 10 20 C10 12 14 8 14 8 Z" stroke-width="1.8" fill="none"/>
+              <!-- Liquid fill line -->
+              <path d="M10.5 22 Q18 20 25.5 22" stroke-width="1.2" opacity="0.5"/>
+              <!-- Bubbles / cleanse icon -->
+              <circle cx="15" cy="24" r="1.2" stroke-width="1.2" fill="none" opacity="0.5"/>
+              <circle cx="21" cy="23" r="1" stroke-width="1.2" fill="none" opacity="0.4"/>
+              <circle cx="18" cy="26" r="0.8" stroke-width="1" fill="none" opacity="0.3"/>
+              <!-- Cap -->
+              <rect x="14" y="4" width="8" height="3" rx="1" stroke-width="1.2" fill="none"/>
+            </svg>
+          </div>
+          <div class="product-name">Detox Products</div>
+          <div class="product-desc">Trusted detox drinks, capsules, and cleanses for when you need a fresh start.</div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <hr class="neon-line" />
+  <div class="neon-divider"></div>
 
-  <!-- ===== WHY CHOOSE US ===== -->
-  <section id="why" class="section-pad">
+
+  <!-- ============================================================
+       WHY CHOOSE US
+  ============================================================ -->
+  <section id="why" class="section">
     <div class="container">
-      <div class="text-center">
-        <span class="section-label reveal">The Galaxy Difference</span>
-        <h2 class="section-title reveal delay-1">
-          Why Choose<br/>
-          <span>Galaxy</span> <span class="mag">Smoke Shop</span>
+
+      <div class="section-header reveal" style="margin-bottom:64px;">
+        <div class="label">Why Galaxy</div>
+        <h2 class="heading heading-lg" style="margin-top:12px;">
+          Built <span class="neon-text-c">Different</span>
         </h2>
       </div>
 
-      <div class="stats-bar reveal delay-2">
-        <div class="stat-item">
-          <div class="stat-num">500<span style="font-size:0.6em">+</span></div>
-          <div class="stat-label">Products In Stock</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num mag-text">4.8<span style="font-size:0.6em">★</span></div>
-          <div class="stat-label">Customer Rating</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">7</div>
-          <div class="stat-label">Days a Week Open</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num mag-text">100<span style="font-size:0.6em">%</span></div>
-          <div class="stat-label">Locally Owned</div>
-        </div>
-      </div>
-
       <div class="why-grid">
-        <div class="why-card reveal delay-1">
-          <div class="why-num">01</div>
-          <div class="why-icon">🏆</div>
-          <div class="why-title">Premium Quality Products</div>
-          <div class="why-desc">We hand-select every product on our shelves. No junk, no counterfeits — just the real, quality goods from brands you trust.</div>
+
+        <!-- Stats -->
+        <div>
+          <div class="stats-grid">
+
+            <div class="stat-card reveal delay-1">
+              <svg class="stat-icon" viewBox="0 0 40 40" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M8 32 L8 18 L20 8 L32 18 L32 32 Z" fill="none"/>
+                <rect x="15" y="24" width="10" height="8" fill="none"/>
+              </svg>
+              <div class="stat-number">500<span style="font-size:24px;color:var(--magenta)">+</span></div>
+              <div class="stat-label">Products In Stock</div>
+            </div>
+
+            <div class="stat-card reveal delay-2">
+              <svg class="stat-icon" viewBox="0 0 40 40" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="20" cy="20" r="14"/>
+                <polyline points="20 12 20 20 26 20"/>
+              </svg>
+              <div class="stat-number">7<span style="font-size:24px;color:var(--magenta)">d</span></div>
+              <div class="stat-label">Open Every Week</div>
+            </div>
+
+            <div class="stat-card reveal delay-3">
+              <svg class="stat-icon" viewBox="0 0 40 40" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 4 L24 14 L35 14 L26 21 L29 32 L20 26 L11 32 L14 21 L5 14 L16 14 Z"/>
+              </svg>
+              <div class="stat-number">5<span style="font-size:24px;color:var(--magenta)">/5</span></div>
+              <div class="stat-label">Customer Rating</div>
+            </div>
+
+            <div class="stat-card reveal delay-4">
+              <svg class="stat-icon" viewBox="0 0 40 40" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="16" cy="16" r="8"/>
+                <circle cx="26" cy="26" r="6"/>
+                <path d="M22 16 C22 16 28 14 30 8"/>
+              </svg>
+              <div class="stat-number">100<span style="font-size:24px;color:var(--magenta)">%</span></div>
+              <div class="stat-label">Local Commitment</div>
+            </div>
+
+          </div>
         </div>
 
-        <div class="why-card reveal delay-2">
-          <div class="why-num">02</div>
-          <div class="why-icon">💰</div>
-          <div class="why-title">Unbeatable Prices</div>
-          <div class="why-desc">As a locally owned shop, we keep overhead low and savings high. Get the best products at prices that actually make sense.</div>
+        <!-- Reasons -->
+        <div class="why-reasons reveal-right">
+
+          <div class="why-reason">
+            <svg class="why-reason-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="22 8 28 20 40 22 30 32 33 44 22 38 11 44 14 32 4 22 16 20 22 8"/>
+            </svg>
+            <div class="why-reason-content">
+              <h4>Premium Quality, Always</h4>
+              <p>We personally vet every brand we carry. If it doesn't hold up, it doesn't make the shelf. Simple as that.</p>
+            </div>
+          </div>
+
+          <div class="why-reason">
+            <svg class="why-reason-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 4 L4 14 L4 30 C4 37 22 42 22 42 C22 42 40 37 40 30 L40 14 Z"/>
+              <polyline points="14 22 20 28 30 16"/>
+            </svg>
+            <div class="why-reason-content">
+              <h4>Private &amp; Judgment-Free</h4>
+              <p>Relaxed, welcoming atmosphere. Whether you're a beginner or a connoisseur, you'll feel at home here.</p>
+            </div>
+          </div>
+
+          <div class="why-reason">
+            <svg class="why-reason-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="22" cy="16" r="8"/>
+              <path d="M8 40 C8 32 14 26 22 26 C30 26 36 32 36 40"/>
+              <path d="M32 12 L36 16 L44 8"/>
+            </svg>
+            <div class="why-reason-content">
+              <h4>Expert Product Guidance</h4>
+              <p>Our staff aren't just salespeople — they're genuine enthusiasts who can answer your real questions.</p>
+            </div>
+          </div>
+
+          <div class="why-reason">
+            <svg class="why-reason-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="4" y="12" width="36" height="26" rx="3"/>
+              <path d="M4 20 L40 20"/>
+              <circle cx="14" cy="28" r="3"/>
+              <path d="M20 28 L32 28 M20 33 L28 33"/>
+            </svg>
+            <div class="why-reason-content">
+              <h4>Honest, Fair Pricing</h4>
+              <p>We believe in transparent pricing with no markup games. You'll find better prices here than most online retailers.</p>
+            </div>
+          </div>
+
         </div>
 
-        <div class="why-card reveal delay-3">
-          <div class="why-num">03</div>
-          <div class="why-icon">🧠</div>
-          <div class="why-title">Knowledgeable Staff</div>
-          <div class="why-desc">Our team isn't just here to sell — they're here to help. Real expertise, honest recommendations, no upselling BS.</div>
-        </div>
-
-        <div class="why-card reveal delay-4">
-          <div class="why-num">04</div>
-          <div class="why-icon">🌟</div>
-          <div class="why-title">Massive Selection</div>
-          <div class="why-desc">500+ products across glass, vapes, CBD, kratom, papers, and more. If we don't have it, we'll find it for you.</div>
-        </div>
-
-        <div class="why-card reveal delay-5">
-          <div class="why-num">05</div>
-          <div class="why-icon">🤝</div>
-          <div class="why-title">Community First</div>
-          <div class="why-desc">We're Colorado Springs locals serving Colorado Springs locals. We believe in building relationships, not just transactions.</div>
-        </div>
-
-        <div class="why-card reveal delay-6">
-          <div class="why-num">06</div>
-          <div class="why-icon">🕐</div>
-          <div class="why-title">Convenient Hours</div>
-          <div class="why-desc">Open Mon–Sat 9AM–9PM and Sun 10AM–7PM. We're here when you need us — early, late, and weekends too.</div>
-        </div>
       </div>
     </div>
   </section>
 
-  <hr class="neon-line" />
+  <div class="neon-divider"></div>
 
-  <!-- ===== TESTIMONIALS ===== -->
-  <section id="testimonials" class="section-pad">
+
+  <!-- ============================================================
+       TESTIMONIALS
+  ============================================================ -->
+  <section id="testimonials" class="section">
     <div class="container">
-      <div class="text-center">
-        <span class="section-label reveal">Happy Customers</span>
-        <h2 class="section-title reveal delay-1">
-          What People<br/>Are <span>Saying</span>
+
+      <div class="section-header reveal">
+        <div class="label">Customer Reviews</div>
+        <h2 class="heading heading-lg" style="margin-top:12px;">
+          What Our <span class="neon-text-m">Customers Say</span>
         </h2>
       </div>
 
       <div class="testimonials-grid">
+
         <div class="testimonial-card reveal delay-1">
-          <span class="quote-mark">"</span>
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">
-            "Best smoke shop in Colorado Springs hands down. The staff actually knows their stuff and helped me find the perfect vaporizer within my budget. Prices are way better than anywhere else I've been."
-          </p>
+          <!-- Quote mark SVG -->
+          <svg class="testimonial-quote-icon" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path d="M0 20 Q0 10 10 8 L10 12 Q6 13 6 18 L10 18 L10 28 L0 28 Z"/>
+            <path d="M18 20 Q18 10 28 8 L28 12 Q24 13 24 18 L28 18 L28 28 L18 28 Z"/>
+          </svg>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+          </div>
+          <p class="testimonial-text">"Best smoke shop in the Springs by far. The staff actually knows what they're talking about — helped me find the perfect piece without any pressure. Prices are solid and the selection is unreal."</p>
           <div class="testimonial-author">
-            <div class="author-avatar">JM</div>
+            <div class="author-avatar">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="7" r="4"/><path d="M2 18 C2 14 5.6 11 10 11 C14.4 11 18 14 18 18"/></svg>
+            </div>
             <div>
-              <div class="author-name">Jake M.</div>
-              <div class="author-since">Regular Customer</div>
+              <div class="author-name">Jason M.</div>
+              <div class="author-tag">Colorado Springs Local</div>
             </div>
           </div>
         </div>
 
         <div class="testimonial-card reveal delay-2">
-          <span class="quote-mark">"</span>
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">
-            "Incredible selection of CBD products and kratom. The staff walked me through everything and never made me feel rushed or judged. Clean store, friendly vibes, great prices. My go-to spot now."
-          </p>
+          <svg class="testimonial-quote-icon" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path d="M0 20 Q0 10 10 8 L10 12 Q6 13 6 18 L10 18 L10 28 L0 28 Z"/>
+            <path d="M18 20 Q18 10 28 8 L28 12 Q24 13 24 18 L28 18 L28 28 L18 28 Z"/>
+          </svg>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+          </div>
+          <p class="testimonial-text">"I came in looking for CBD products and left with way more knowledge than I expected. They walked me through everything, answered every question. This is what a smoke shop should feel like."</p>
           <div class="testimonial-author">
-            <div class="author-avatar">SR</div>
+            <div class="author-avatar">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="7" r="4"/><path d="M2 18 C2 14 5.6 11 10 11 C14.4 11 18 14 18 18"/></svg>
+            </div>
             <div>
-              <div class="author-name">Sarah R.</div>
-              <div class="author-since">Loyal Customer</div>
+              <div class="author-name">Kayla R.</div>
+              <div class="author-tag">First-Time Customer</div>
             </div>
           </div>
         </div>
 
         <div class="testimonial-card reveal delay-3">
-          <span class="quote-mark">"</span>
-          <div class="stars">★★★★★</div>
-          <p class="testimonial-text">
-            "Found a beautiful glass piece I'd been searching for everywhere. These guys actually carry quality stuff, not cheap imports. The whole shopping experience feels totally different from chain stores."
-          </p>
+          <svg class="testimonial-quote-icon" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path d="M0 20 Q0 10 10 8 L10 12 Q6 13 6 18 L10 18 L10 28 L0 28 Z"/>
+            <path d="M18 20 Q18 10 28 8 L28 12 Q24 13 24 18 L28 18 L28 28 L18 28 Z"/>
+          </svg>
+          <div class="testimonial-stars" aria-label="5 out of 5 stars">
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+            <svg class="star-svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><polygon points="8,1 10.2,5.5 15,6.2 11.5,9.6 12.4,14.5 8,12.2 3.6,14.5 4.5,9.6 1,6.2 5.8,5.5"/></svg>
+          </div>
+          <p class="testimonial-text">"I drive past three other shops to come here. Their kratom selection is the best in the city and they always have what I need in stock. Never felt rushed or judged. True local gem."</p>
           <div class="testimonial-author">
-            <div class="author-avatar">DK</div>
+            <div class="author-avatar">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="7" r="4"/><path d="M2 18 C2 14 5.6 11 10 11 C14.4 11 18 14 18 18"/></svg>
+            </div>
             <div>
-              <div class="author-name">Derek K.</div>
-              <div class="author-since">Collector</div>
+              <div class="author-name">Derek S.</div>
+              <div class="author-tag">Regular Customer</div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <hr class="neon-line" />
+  <div class="neon-divider"></div>
 
-  <!-- ===== FAQ ===== -->
-  <section id="faq" class="section-pad">
+
+  <!-- ============================================================
+       FAQ
+  ============================================================ -->
+  <section id="faq" class="section">
     <div class="container">
-      <div class="text-center">
-        <span class="section-label reveal">Got Questions?</span>
-        <h2 class="section-title reveal delay-1">
-          Frequently<br/>
-          <span>Asked</span> <span class="mag">Questions</span>
+
+      <div class="section-header reveal">
+        <div class="label">Have Questions?</div>
+        <h2 class="heading heading-lg" style="margin-top:12px;">
+          Frequently <span class="neon-text-c">Asked</span>
         </h2>
       </div>
 
       <div class="faq-list">
-        <div class="faq-item reveal delay-1">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>What are your hours of operation?</span>
-            <span class="faq-icon">+</span>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Do I need an ID to shop at Galaxy Smoke Shop?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+            </span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">
-              We're open <strong style="color:var(--cyan)">Monday through Saturday from 9:00 AM to 9:00 PM</strong> and <strong style="color:var(--cyan)">Sunday from 10:00 AM to 7:00 PM</strong>. We're here for you 7 days a week — no appointment needed, just walk right in!
-            </div>
+            <p>Yes. You must be 21 years of age or older to shop in our store. A valid government-issued photo ID is required at the door, no exceptions. This applies to all customers every visit.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-1">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">What brands of glass do you carry?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>We carry a rotating selection of premium borosilicate glass from recognized brands and skilled independent glassblowers. Our inventory changes regularly — stop in or call us to ask about current stock. We always aim to have a range of budgets covered.</p>
           </div>
         </div>
 
         <div class="faq-item reveal delay-2">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Do I need ID to shop at Galaxy Smoke Shop?</span>
-            <span class="faq-icon">+</span>
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Are your CBD and Delta products lab-tested?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+            </span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Yes — <strong style="color:var(--magenta)">you must be 21 years or older</strong> to shop with us. We card everyone, every time, no exceptions. Please bring a valid government-issued photo ID such as a driver's license, state ID, or passport.
-            </div>
+            <p>Absolutely. We only stock CBD, Delta-8, Delta-9, HHC, and kratom products from vendors who provide verifiable third-party lab results (COAs). If it can't prove its purity and potency, it doesn't make our shelves. Ask our staff to see lab reports on any product.</p>
           </div>
         </div>
 
         <div class="faq-item reveal delay-3">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Do you carry CBD and Delta products? Are they legal?</span>
-            <span class="faq-icon">+</span>
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">Can you help me pick the right product if I'm new?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+            </span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">
-              Yes! We carry a wide range of <strong style="color:var(--cyan)">CBD, Delta-8, Delta-9, Delta-10, HHC, THC-P, and other hemp-derived products</strong>. All products we carry comply with federal and Colorado state law. Every product is lab-tested with certificates of analysis available. Our staff can walk you through your options.
-            </div>
+            <p>That's exactly what we're here for. Our staff are passionate about this stuff and love helping newcomers find the right fit — whether that's your first vaporizer, a beginner-friendly glass piece, or understanding the difference between CBD and Delta products. No judgment, ever.</p>
           </div>
         </div>
 
         <div class="faq-item reveal delay-4">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Can I return or exchange products?</span>
-            <span class="faq-icon">+</span>
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-question-text">What are your hours and where are you located?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+            </span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">
-              We want you to be completely happy with your purchase. Unopened and unused products can be exchanged within a reasonable timeframe with receipt. Defective glassware or hardware may be exchanged for store credit. Please note that consumable products (CBD, kratom, papers, etc.) cannot be returned once opened. Stop in and talk to our team for specifics.
-            </div>
+            <p>We're at 3960 Maizeland Rd, Colorado Springs, CO 80909. Hours: Monday through Saturday 9AM–9PM, and Sunday 10AM–7PM. We're open every day of the week, so there's always a good time to stop by.</p>
           </div>
         </div>
 
-        <div class="faq-item reveal delay-5">
-          <button class="faq-question" onclick="toggleFAQ(this)">
-            <span>Where are you located and is there parking?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              We're located at <strong style="color:var(--cyan)">3960 Maizeland Rd, Colorado Springs, CO 80909</strong>. There's convenient parking available right in front of the shop — easy in, easy out. We're centrally located and easy to find. Look for us on Google Maps or give us a call if you need directions!
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
 
-  <hr class="neon-line" />
+  <div class="neon-divider"></div>
 
-  <!-- ===== CONTACT ===== -->
-  <section id="contact" class="section-pad">
+
+  <!-- ============================================================
+       CONTACT
+  ============================================================ -->
+  <section id="contact" class="section">
     <div class="container">
-      <div class="text-center">
-        <span class="section-label reveal">Come See Us</span>
-        <h2 class="section-title reveal delay-1">
-          <span>Find</span> Us &<br/>
-          Get In <span class="mag">Touch</span>
+
+      <div class="section-header reveal">
+        <div class="label">Find Us</div>
+        <h2 class="heading heading-lg" style="margin-top:12px;">
+          Visit or <span class="neon-text-m">Get In Touch</span>
         </h2>
       </div>
 
-      <div class="contact-layout">
-        <!-- Info side -->
-        <div>
-          <h3 class="reveal">Store Information</h3>
+      <div class="contact-grid">
 
-          <div class="contact-block reveal delay-1">
-            <div class="contact-block-icon">📍</div>
-            <div class="contact-block-text">
-              <div class="contact-block-title">Address</div>
-              <div class="contact-block-value">
-                3960 Maizeland Rd<br/>
-                Colorado Springs, CO 80909
-                <br/>
-                <a href="https://maps.google.com/?q=3960+Maizeland+Rd+Colorado+Springs+CO+80909" target="_blank" class="map-link">
-                  ↗ Open in Google Maps
-                </a>
-              </div>
+        <div class="contact-info reveal-left">
+
+          <!-- Address -->
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-item-body">
+              <h4>Address</h4>
+              <p>3960 Maizeland Rd<br/>Colorado Springs, CO 80909</p>
             </div>
           </div>
 
-          <div class="contact-block reveal delay-2">
-            <div class="contact-block-icon">📞</div>
-            <div class="contact-block-text">
-              <div class="contact-block-title">Phone</div>
-              <div class="contact-block-value">
-                <a href="tel:+17192557222">(719) 255-7222</a>
-              </div>
+          <!-- Phone -->
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.4 10.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.31 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+            </div>
+            <div class="contact-item-body">
+              <h4>Phone</h4>
+              <a href="tel:+17195551234">(719) 555-1234</a>
             </div>
           </div>
 
-          <div class="contact-block reveal delay-3">
-            <div class="contact-block-icon">🕐</div>
-            <div class="contact-block-text">
-              <div class="contact-block-title">Store Hours</div>
-              <div class="contact-block-value">
-                <div class="hours-grid">
-                  <span class="hours-day">Monday – Saturday</span>
-                  <span class="hours-time">9:00 AM – 9:00 PM</span>
-                  <span class="hours-day">Sunday</span>
-                  <span class="hours-time">10:00 AM – 7:00 PM</span>
-                </div>
-              </div>
+          <!-- Hours -->
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="contact-item-body">
+              <h4>Store Hours</h4>
+              <ul class="hours-list">
+                <li><span class="day">Monday – Saturday</span><span class="time">9AM – 9PM</span></li>
+                <li><span class="day">Sunday</span><span class="time">10AM – 7PM</span></li>
+              </ul>
             </div>
           </div>
 
-          <div class="contact-block reveal delay-4" style="border-color:rgba(255,20,147,0.25);">
-            <div class="contact-block-icon">🔞</div>
-            <div class="contact-block-text">
-              <div class="contact-block-title" style="color:var(--magenta);">Age Requirement</div>
-              <div class="contact-block-value" style="color:var(--muted);font-size:0.85rem;">
-                Valid government-issued ID required.<br/>Must be 21+ to enter and purchase.
-              </div>
-            </div>
-          </div>
+          <!-- Directions button -->
+          <a href="https://maps.google.com/?q=3960+Maizeland+Rd+Colorado+Springs+CO+80909" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="align-self:flex-start;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Get Directions
+          </a>
+
         </div>
 
-        <!-- Form side -->
-        <div class="reveal-right delay-2">
-          <div class="contact-form">
-            <div class="form-title">Send Us a <span>Message</span></div>
-
-            <div id="contactFormWrap">
-              <form id="contactForm" onsubmit="submitForm(event)">
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="fname">First Name</label>
-                    <input type="text" id="fname" placeholder="Your first name" required />
-                  </div>
-                  <div class="form-group">
-                    <label for="lname">Last Name</label>
-                    <input type="text" id="lname" placeholder="Your last name" />
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label for="email">Email Address</label>
-                  <input type="email" id="email" placeholder="you@email.com" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="phone">Phone Number (Optional)</label>
-                  <input type="tel" id="phone" placeholder="(719) 000-0000" />
-                </div>
-
-                <div class="form-group">
-                  <label for="topic">What can we help with?</label>
-                  <select id="topic">
-                    <option value="">Select a topic...</option>
-                    <option>Product Availability</option>
-                    <option>Pricing Question</option>
-                    <option>Store Hours / Location</option>
-                    <option>Wholesale / Bulk Inquiry</option>
-                    <option>General Question</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="message">Your Message</label>
-                  <textarea id="message" placeholder="What's on your mind? We'd love to help..." required></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-cyan" style="width:100%;justify-content:center;">
-                  Send Message ✉️
-                </button>
-              </form>
-            </div>
-
-            <div class="form-success" id="formSuccess">
-              <div class="form-success-icon">🌌</div>
-              <div class="form-success-title">Message Sent!</div>
-              <div class="form-success-text">
-                Thanks for reaching out! We'll get back to you soon.<br/>
-                Or call us at <a href="tel:+17192557222" style="color:var(--cyan)">(719) 255-7222</a> for immediate assistance.
+        <!-- Contact Form -->
+        <div class="contact-form reveal-right">
+          <div class="form-title">Send Us a Message</div>
+          <form onsubmit="handleFormSubmit(event)" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="fname">First Name</label>
+                <input class="form-input" type="text" id="fname" name="fname" placeholder="John" autocomplete="given-name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lname">Last Name</label>
+                <input class="form-input" type="text" id="lname" name="lname" placeholder="Doe" autocomplete="family-name" />
               </div>
             </div>
-          </div>
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="john@example.com" autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <input class="form-input" type="text" id="subject" name="subject" placeholder="Product inquiry, hours, etc." />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea class="form-textarea" id="message" name="message" placeholder="How can we help you?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Send Message
+            </button>
+            <div id="formFeedback" style="margin-top:16px;font-size:14px;display:none;"></div>
+          </form>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer id="footer">
     <div class="container">
-      <div class="footer-logo">
-        <span>Galaxy</span> Smoke Shop
-      </div>
-      <div class="footer-tagline">Elevate Your Experience · Colorado Springs</div>
+      <div class="footer-inner">
 
-      <ul class="footer-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#why">Why Us</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+        <div>
+          <div class="footer-logo-text">GALAXY <span>SMOKE SHOP</span></div>
+          <p class="footer-copy" style="margin-top:6px;">3960 Maizeland Rd, Colorado Springs, CO 80909</p>
+        </div>
 
-      <div class="footer-divider"></div>
-
-      <div class="footer-bottom">
         <div class="footer-copy">
-          © 2025 Galaxy Smoke Shop · 3960 Maizeland Rd, Colorado Springs, CO 80909
+          <p>&copy; 2025 Galaxy Smoke Shop. All rights reserved.</p>
+          <p style="margin-top:4px;">Must be 21+ to purchase.</p>
         </div>
-        <div class="footer-age">🔞 21+ Only</div>
+
         <div class="footer-credit">
-          Website by <a href="#" target="_blank">Kinetic Digital</a>
+          Website by <a href="#" rel="noopener">Kinetic Digital</a>
         </div>
+
       </div>
     </div>
   </footer>
 
-  <!-- ===== JAVASCRIPT ===== -->
-  <script>
-    // ── Navbar scroll ──
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
-    });
 
-    // ── Hamburger ──
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ----- Particles ----- */
+    (function() {
+      const container = document.getElementById('particles');
+      const colors = ['#00E5FF','#FF1493','#ffffff'];
+      for (let i = 0; i < 30; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 3 + 1;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const left = Math.random() * 100;
+        const delay = Math.random() * 20;
+        const duration = 15 + Math.random() * 20;
+        const opacity = Math.random() * 0.4 + 0.1;
+        p.style.cssText = `
+          width:${size}px; height:${size}px;
+          background:${color};
+          left:${left}%;
+          box-shadow: 0 0 ${size*3}px ${color};
+          animation-delay:-${delay}s;
+          animation-duration:${duration}s;
+          opacity:${opacity};
+        `;
+        container.appendChild(p);
+      }
+    })();
+
+    /* ----- Nav scroll effect ----- */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    /* ----- Hamburger menu ----- */
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
+      const open = hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
     });
-    function closeMobile() {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    }
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
 
-    // ── Scroll reveal ──
-    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
+    /* ----- FAQ accordion ----- */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    /* ----- Scroll reveal ----- */
+    const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(el => io.observe(el));
+    reveals.forEach(el => observer.observe(el));
 
-    // ── FAQ accordion ──
-    function toggleFAQ(btn) {
-      const item = btn.closest('.faq-item');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    }
-
-    // ── Hero particles ──
-    const particleContainer = document.getElementById('heroParticles');
-    const colors = ['#00E5FF', '#FF1493', '#B060FF', '#00E5FF', '#00E5FF'];
-    for (let i = 0; i < 35; i++) {
-      const p = document.createElement('span');
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      const size = Math.random() * 3 + 1;
-      p.style.cssText = `
-        left: ${Math.random() * 100}%;
-        width: ${size}px;
-        height: ${size}px;
-        background: ${color};
-        box-shadow: 0 0 ${size * 3}px ${color};
-        animation-duration: ${Math.random() * 12 + 8}s;
-        animation-delay: ${Math.random() * 12}s;
-      `;
-      particleContainer.appendChild(p);
-    }
-
-    // ── Count-up animation ──
-    function countUp(el, target, suffix = '') {
-      const duration = 2000;
+    /* ----- Counter animation for stats ----- */
+    function animateCounter(el, target, duration = 1800) {
       const start = performance.now();
-      const animate = (now) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const ease = 1 - Math.pow(1 - progress, 3);
-        const value = Math.floor(ease * target);
-        el.textContent = value + suffix;
-        if (progress < 1) requestAnimationFrame(animate);
+      const update = (time) => {
+        const elapsed = time - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = current;
+        if (progress < 1) requestAnimationFrame(update);
       };
-      requestAnimationFrame(animate);
+      requestAnimationFrame(update);
     }
-
-    // Observe stats bar
-    const statsBar = document.querySelector('.stats-bar');
-    let counted = false;
-    if (statsBar) {
-      const statsObs = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting && !counted) {
-          counted = true;
-          const nums = statsBar.querySelectorAll('.stat-num');
-          const targets = [500, 4.8, 7, 100];
-          const suffixes = ['+', '★', '', '%'];
-          nums.forEach((el, i) => {
-            if (i === 1) {
-              // decimal
-              const duration = 2000;
-              const start = performance.now();
-              const animate = (now) => {
-                const progress = Math.min((now - start) / duration, 1);
-                const ease = 1 - Math.pow(1 - progress, 3);
-                const value = (ease * 4.8).toFixed(1);
-                el.innerHTML = value + '<span style="font-size:0.6em">★</span>';
-                if (progress < 1) requestAnimationFrame(animate);
-              };
-              requestAnimationFrame(animate);
-            } else {
-              const span = el.querySelector('span');
-              const spanHTML = span ? span.outerHTML : '';
-              el.innerHTML = '';
-              countUp({ textContent: '' }, targets[i], '');
-              const duration = 2000;
-              const start = performance.now();
-              const animate = (now) => {
-                const progress = Math.min((now - start) / duration, 1);
-                const ease = 1 - Math.pow(1 - progress, 3);
-                const value = Math.floor(ease * targets[i]);
-                el.innerHTML = value + spanHTML;
-                if (progress < 1) requestAnimationFrame(animate);
-              };
-              requestAnimationFrame(animate);
-            }
-          });
-        }
-      }, { threshold: 0.5 });
-      statsObs.observe(statsBar);
-    }
-
-    // ── Form submit ──
-    function submitForm(e) {
-      e.preventDefault();
-      const wrap = document.getElementById('contactFormWrap');
-      const success = document.getElementById('formSuccess');
-      wrap.style.opacity = '0';
-      wrap.style.transition = 'opacity 0.3s';
-      setTimeout(() => {
-        wrap.style.display = 'none';
-        success.classList.add('show');
-      }, 350);
-    }
-
-    // ── Smooth scroll for nav links ──
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const statTargets = [500, 7, 5, 100];
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(statNumbers).indexOf(entry.target);
+          const numSpan = entry.target.childNodes[0];
+          animateCounter({ set textContent(v) { numSpan.textContent = v; } }, statTargets[idx]);
+          statObserver.unobserve(entry.target);
         }
       });
-    });
+    }, { threshold: 0.5 });
+    statNumbers.forEach(el => statObserver.observe(el));
+
+    /* ----- Form submit ----- */
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const fb = document.getElementById('formFeedback');
+      fb.style.display = 'block';
+      fb.style.color = 'var(--cyan)';
+      fb.textContent = 'Message sent! We will get back to you shortly.';
+      e.target.reset();
+      setTimeout(() => { fb.style.display = 'none'; }, 5000);
+    }
   </script>
+
 </body>
 </html>
