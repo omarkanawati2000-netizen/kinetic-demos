@@ -1272,13 +1272,19 @@
       .nav-links, .nav-cta .btn { display: none; }
       .hamburger { display: flex; }
       .nav-cta .btn-call-sm { display: inline-flex !important; }
+      .nav-logo-text { font-size: 15px; letter-spacing: 0.5px; }
+      .nav-logo-icon { width: 30px; height: 30px; }
+      .age-bar { font-size: 10px; padding: 6px 12px; letter-spacing: 1px; }
       .form-row { grid-template-columns: 1fr; }
       .trust-inner { gap: 32px; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .footer-inner { flex-direction: column; text-align: center; }
     }
     @media (max-width: 480px) {
-      :root { --nav-h: 64px; }
+      :root { --nav-h: 60px; }
+      .nav-logo-text { font-size: 13px; max-width: 140px; line-height: 1.2; }
+      .nav-logo { gap: 8px; }
+      .age-bar { font-size: 9px; padding: 5px 8px; letter-spacing: 0.5px; }
       .products-grid { grid-template-columns: 1fr 1fr; }
       .trust-inner { gap: 20px; }
       .trust-badge { flex-direction: column; text-align: center; gap: 8px; }
@@ -2294,5 +2300,6 @@
 
 </body>
 </html>
-< ! - -   c a c h e   b u s t   - - >  
+< ! - -   c a c h e   b u s t   - - > 
+ 
  
